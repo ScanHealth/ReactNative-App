@@ -17,6 +17,7 @@ export default class Splash extends Component {
                 <LottieView
                     source={require('../assets/splash.json')}
                     autoPlay
+                    speed = {2}
                     loop = {false}
                     onAnimationFinish = {() =>{
                         console.log("Animation Finished.")
