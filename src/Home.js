@@ -1,3 +1,121 @@
+import { Center } from 'native-base';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Image} from 'react-native';
+
+
+import { Assets } from 'react-navigation-stack';
+
+
+
+export default class Home extends Component {
+    constructor(props){
+        super();
+    }
+
+    render(){
+          const { onPress, title = 'Save' } = this.props;
+        return(
+            <View style={homeStyleSheet._bouton_group}>
+                <ImageBackground source={require('../assets/BackgroundHomePage.jpg')} resizeMode="cover" /*style={styles.image}*/>
+                <View style={homeStyleSheet._bouton_group}>
+                <Image source={require('../assets/scanhealth.png')} style={{ width: 300, height: 150,flex:0,  alignItems: 'center', }}/>
+                </View>
+                <View style={homeStyleSheet._bouton_group}>                    
+                    {/* Button Register */}
+                    <Pressable
+                        style={({pressed}) => [
+                            {
+                                width: 306,
+                                height: 58,
+                                borderRadius: 100,
+                                backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                            },
+                        
+                        ]}
+                        onPress={() => Alert.alert('Button Pressed!')}>
+                        <View style={homeStyleSheet._TextView}>
+                            <Text style = {homeStyleSheet._text, homeStyleSheet._white}>
+                                Commencer
+                            </Text>
+                        </View>
+                    </Pressable>
+                    
+                    {/* Button Login */}
+                    <Pressable
+                        style={({pressed}) => [
+                            {
+                                width: 206,
+                                height: 38,
+                                borderRadius: 10,
+                                backgroundColor: pressed ? 'rgba(88,199,10,0)' : 'rgba(88,166,60,0)',
+                            },
+                        
+                        ]}
+                        onPress={() => Alert.alert('Button Pressed!')}>
+                        <View style={homeStyleSheet._TextView}>
+                            <Text style = {homeStyleSheet._text, homeStyleSheet._black}>
+                                Se connecter
+                            </Text>
+                        </View>
+                    </Pressable>                                         
+                </View>
+                </ImageBackground>
+            </View>
+        )
+    }
+}
+
+const homeStyleSheet = StyleSheet.create({
+    /*_page_login: {
+        position: 'relative',
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+        borderRadius: 0,
+        backgroundColor: "rgba(216,234,199,1)",
+    },*/
+    _bouton_group: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        borderRadius: 0,
+        backgroundColor: "rgba(0,0,0,0)",
+    },
+    _text: {
+        fontFamily: "Andika",
+        fontWeight: "400",
+        textDecorationLine: "none",
+        fontSize: 20,
+        letterSpacing: 0.1,
+    },
+    _TextView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    _white:{
+        color: "rgba(255,255,255,1)",
+    },
+    _black:{
+        color: "rgba(0,0,0,1)",
+    },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Dimensions, Pressable, Alert} from 'react-native';
 
@@ -41,7 +159,7 @@ const homeStyleSheet = StyleSheet.create({
         height: Dimensions.get("window").height,
         borderRadius: 0,
         backgroundColor: "rgba(216,234,199,1)",
-    },*/
+    },*//*
     _bouton_group: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -63,4 +181,4 @@ const homeStyleSheet = StyleSheet.create({
         alignItems: 'center',
     },
 
-})
+})*/
