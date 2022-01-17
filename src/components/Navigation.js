@@ -20,7 +20,10 @@ const Navigation = () => {
                 headerShown: false
             }}>
             {userInfo.token ? (
+                <>
+                <Stack.Screen name="Splash" component={Splash}/>
                 <Stack.Screen name="Scanner" component={ScannerScreen}/>
+                </>
              ) : (
                  <>
                 <Stack.Screen name="Splash" component={Splash}/>
