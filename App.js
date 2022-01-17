@@ -7,23 +7,14 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import { Button, Center, NativeBaseProvider } from "native-base"
-
-export const Example = () => {
-  return (
-    <>
-      <Button onPress={() => console.log("hello world")}>Primary</Button>
-    </>
-  )
-}
+import { Button, Center, NativeBaseProvider } from "native-base";
+import {AuthProvider} from './src/context/AuthContext';
+import Navigation from './src/components/Navigation';
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <Center flex={1} px="3">
-        <Example />
-      </Center>
-    </NativeBaseProvider>
+    <AuthProvider>
+      <Navigation/>
+    </AuthProvider>
   );
 }

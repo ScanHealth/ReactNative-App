@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import Home from './Home';
-import Login from './Login';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './Home';
+import LoginScreen from './Login';
+import {AuthContext} from './context/AuthContext';
 
-const TabNavigator = createBottomTabNavigator({
-  Home: Home,
-  Login: Login,
-});
 
-export default createAppContainer(TabNavigator);
+const Tab = createBottomTabNavigator();
+
+export default function LoginRegister() {
+      const {userInfo} = useContext(AuthContext)
+
+  return (
+      <Tab.Navigator screenOptions={{
+            headerShown: false
+        }}>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Login" component={LoginScreen} />
+      </Tab.Navigator>
+  );
+}
