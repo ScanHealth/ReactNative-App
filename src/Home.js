@@ -1,6 +1,6 @@
 import { Center } from 'native-base';
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Image} from 'react-native';
+import React, {Component,useRef} from 'react';
+import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Image, Animated} from 'react-native';
 
 
 import { Assets } from 'react-navigation-stack';
@@ -11,18 +11,51 @@ export default class Home extends Component {
     constructor(props){
         super();
     }
+    state = {
+        animation: new Animated.Value(0),
+        fadeAnimation: new Animated.Value(1)
+    }
+    startAnimationGoUp = () => {
+        Animated.timing(this.state.animation,{
+            toValue: -1200,
+            duration: 1500,
+            useNativeDriver: true
+        }).start();
+    }
+    startAnimationFadeIn = () => {
+        Animated.timing(this.state.fadeAnimation, {
+            toValue: 1,
+            duration: 100,
+            useNativeDriver: true
+          }).start();
+    }
+    startAnimationFadeOut = () => {
+        Animated.timing(this.state.fadeAnimation, {
+            toValue: 0,
+            duration: 100,
+            useNativeDriver: true
+          }).start();
+    }
+
 
     render(){
           const { onPress, title = 'Save' } = this.props;
-        return(
-            <View style={homeStyleSheet._bouton_group}>
-                <ImageBackground source={require('../assets/BackgroundHomePage.jpg')} resizeMode="cover" /*style={styles.image}*/>
-                <View style={homeStyleSheet._bouton_group}>
-                <Image source={require('../assets/scanhealth.png')} style={{ width: 300, height: 150,flex:0,  alignItems: 'center', }}/>
-                </View>
-                <View style={homeStyleSheet._bouton_group}>                    
+
+            const animationGoTop = {
+                transform: [
+                    {
+                        translateY: this.state.animation,
+                    }
+                ]
+            }
+
+          return(
+            <View style={homeStyleSheet._bouton_group}>                
+                <Animated.View style={homeStyleSheet._bouton_group,animationGoTop/*,{opacity: this.state.fadeAnimation}*/}>                                   
+                <ImageBackground source={require('../assets/BackgroundHomePage.jpg')} resizeMode="cover">
+                    <View style={homeStyleSheet._bouton_group}>    
                     {/* Button Register */}
-                    <Pressable
+                    <Pressable onPress = {this.startAnimationGoUp}
                         style={({pressed}) => [
                             {
                                 width: 306,
@@ -31,8 +64,7 @@ export default class Home extends Component {
                                 backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
                             },
                         
-                        ]}
-                        onPress={() => Alert.alert('Button Pressed!')}>
+                        ]}>
                         <View style={homeStyleSheet._TextView}>
                             <Text style = {homeStyleSheet._text, homeStyleSheet._white}>
                                 Commencer
@@ -57,9 +89,14 @@ export default class Home extends Component {
                                 Se connecter
                             </Text>
                         </View>
-                    </Pressable>                                         
+                    </Pressable>
+                    </View>    
+                    </ImageBackground>
+                </Animated.View>
+                {/* Logo view */}
+                <View style={homeStyleSheet._bouton_group,{position:'absolute',top:20,left:0,bottom:0,right:0}}>                
+                <Image source={require('../assets/scanhealth.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
                 </View>
-                </ImageBackground>
             </View>
         )
     }
