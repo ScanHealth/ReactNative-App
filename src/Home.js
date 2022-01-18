@@ -85,16 +85,18 @@ const Home = () => {
       }
 
           return(
-            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%'}}>                
+            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%',backgroundColor:'#486F3A'}}>                
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
-                <ImageBackground source={require('../assets/fruits.gif')} style={{width: '100%', height: '100%'}} resizeMode="cover">
-                {/* <LottieView
-                source={require('../assets/fruit.json')}
+                <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
+                <LottieView
+                source={require('../assets/fruits.json')}
                 autoPlay
-                speed = {2}
+                speed = {1.4}
                 loop = {true}
-                /> */}
-                    <View style={homeStyleSheet._bouton_group}>    
+                style={{width: '100%', height: '100%',alignSelf:'center'}}
+                />                   
+                </ImageBackground>
+                    <View style={homeStyleSheet._bouton_group,{position:'absolute',alignItems:'center',alignSelf:'center',marginTop:'100%'}}>    
                     {/* Button Register */}
                     <Pressable onPress = {startAnimationGoUpRegister}
                         style={({pressed}) => [
@@ -131,13 +133,12 @@ const Home = () => {
                             </Text>
                         </View>
                     </Pressable>
-                    </View>    
-                    </ImageBackground>
+                    </View>
                 </Animated.View>
 
                 {/* Logo view */}
                 <View style={homeStyleSheet._bouton_group,{position:'absolute',top:20,left:0,bottom:0,right:0,backgroundColor:'486F3A'}}>                
-                <Image source={require('../assets/scanhealth.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
+                <Image source={require('../assets/scanhealthnoir.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
 
                 {/* Input Area */}
                 <View style={{alignItems:'center', marginTop:'50%'}}>
@@ -275,7 +276,8 @@ export default Home;
 
 
 /*
-color=backgroundColor:'#D9EAC7'
+color=backgroundColor:'#D9EAC7' vert claire
+color=backgroundColor:'#486F3A' vert foncé
 
 
 import React, {Component} from 'react';
