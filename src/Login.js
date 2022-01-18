@@ -26,7 +26,6 @@ const Login = () => {
                     register(email, username, password, password_confirmation);
                 }}/>
             </View>
-
             <CustomInput placeholder="Email" value={email} setValue={setEmail} invisibled={false}/>
             <CustomInput placeholder="Password" value={password} setValue={setPassword} invisibled={true}/>
             <View style={styles.btn}>
