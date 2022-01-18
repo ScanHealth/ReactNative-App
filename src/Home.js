@@ -21,17 +21,17 @@ const Home = () => {
     const startAnimationGoUpRegister = () => {
         Animated.timing(state.animation,{
             toValue: -500,
-            duration: 1500,
+            duration: 1000,
             useNativeDriver: false
-        }).start(()=>setRegisterInput(true));     
+        }).start(()=>setRegisterInput(true),setRegisterInput(false));     
     }
 
     const startAnimationGoUpLogin = () => {
         Animated.timing(state.animation,{
             toValue: -500,
-            duration: 1500,
+            duration: 1000,
             useNativeDriver: false
-        }).start(()=>setLoginInput(true));
+        }).start(()=>setLoginInput(true),setLoginInput(false));
                 
     }
 
@@ -140,7 +140,7 @@ const Home = () => {
                 <Image source={require('../assets/scanhealth.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
 
                 {/* Input Area */}
-                <View style={{alignItems:'center', marginTop:200}}>
+                <View style={{alignItems:'center', marginTop:'50%'}}>
                 {LoginInput ? (
                     <> 
                     {/* //Page Login */}
