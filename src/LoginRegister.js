@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Home';
-import LoginScreen from './Login';
 import {AuthContext} from './context/AuthContext';
 import TestSlider from './TestSlider';
 
@@ -18,7 +17,6 @@ export default function LoginRegister() {
             headerShown: false
         }}>
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Login" component={LoginScreen} />
         <Tab.Screen name="Test" component={TestSlider} />
       </Tab.Navigator>
   );

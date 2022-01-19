@@ -6,7 +6,7 @@ import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Im
 const TestSlider = () => {
 
     return(
-        
+        <View></View>
     )
 }
 
