@@ -175,7 +175,6 @@ const Home = () => {
                 : null}
                 {RegisterInput ? (
                     <>
-                    {console.log("RegisterInput")}
                     {/* // Page Register */}
                     <CustomInput placeholder="Username" value={username} setValue={setUsername} invisibled={false}/>
                     <CustomInput placeholder="Email" value={email} setValue={setEmail} invisibled={false}/>

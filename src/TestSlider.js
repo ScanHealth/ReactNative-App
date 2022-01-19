@@ -9,7 +9,7 @@ const TestSlider = () => {
   
     return (
       <SafeAreaView style={styles.container}>
-        <BottomSheet hasDraggableIcon ref={bottomSheet} height={150} />
+        <BottomSheet hasDraggableIcon draggable sheetBackgroundColor="#D9EAC7" ref={bottomSheet} height={150} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => bottomSheet.current.show()}
@@ -51,3 +51,11 @@ const styles = StyleSheet.create({
 
 
 export default TestSlider;
+
+/*
+Différente fonction importante pour le modal
+
+bottomSheet.current.show() -> Fait pop le modal
+
+
+*/
