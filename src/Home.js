@@ -4,6 +4,8 @@ import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Im
 import LottieView from 'lottie-react-native';
 import CustomInput from './components/CustomInput';
 import CustomButton from './components/CustomButton';
+import Spinner from 'react-native-loading-spinner-overlay';
+import {AuthContext} from './context/AuthContext';
 
 
 import { Assets } from 'react-navigation-stack';
@@ -11,7 +13,6 @@ import { exp } from 'react-native-reanimated';
 
 
 const Home = () => {
-
 
     const state = {
         animation: new Animated.Value(0),
@@ -66,6 +67,8 @@ const Home = () => {
         const [username, setUsername] = useState('');
         const [password, setPassword] = useState('');
         const [password_confirmation, setPassword_confirmation] = useState('');
+        const {isLoading, register, login, userInfo} = useContext(AuthContext);
+
 
 
         const animationGoTop = {
@@ -85,7 +88,12 @@ const Home = () => {
       }
 
           return(
+<<<<<<< HEAD
+            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%'}}>         
+                <Spinner visible={isLoading}/>
+=======
             <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%',backgroundColor:'#486F3A'}}>                
+>>>>>>> 3af51e93ed70735b813518ee67e8960651171503
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
                 <LottieView
