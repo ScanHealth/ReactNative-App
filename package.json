@@ -30,6 +30,7 @@
     "react-native-screens": "^3.10.1",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-table-component": "^1.2.1",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22"
   },
   "devDependencies": {

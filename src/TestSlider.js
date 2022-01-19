@@ -1,8 +1,9 @@
 import React, {Component,useState, useContext, useRef } from 'react';
 import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight } from 'react-native';
-import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+
 
 
 const TestSlider = () => {
@@ -10,6 +11,19 @@ const TestSlider = () => {
     const [ModalState, setModalState] = useState(false);
         
     const sheetRef = React.useRef(null);
+
+    const state = {
+        tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de ?g'],
+        tableData: [
+          ['Énergie', '80 Kcal'],
+          ['Matière grasses', '4.1g'],
+          ['Acides gras saturés', '0.5g'],
+          ['Glucide dont sucre', '8.6g'],
+          ['Fibres', ''],
+          ['Protéines', '0.9g'],
+          ['Sel', '0.016g']
+        ]
+      }
 
     const renderContent = () => (
         <View
@@ -20,9 +34,68 @@ const TestSlider = () => {
             }}
         >
             {ModalState ? (
+                <>
+                {/* Modal haut affichage down + image + titre + details */}
                 <ChevronDown style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(2);setModalState(false);}}/>
+                <View style={{justifyContent:'space-between',flexDirection:'column'}}>
+                <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
+                <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
+                <Image source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
+                </View>
+                {/* View Titre + sous-titre */}
+                <View style={{ alignItems:'center'}}>
+                    <Text style={styles.title}>Title</Text>
+                    <Text style={styles.text,styles.black}>UnderTitle</Text>
+                </View>
+                </View>
+                <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
+                {/* View tableau information */}
+                    <Table borderStyle={{borderWidth: 0, borderColor: '#c8e1ff'}}>
+                       <Row data={state.tableHead} style={styles.head} textStyle={styles.text,styles.black}/>
+                        <Rows data={state.tableData} textStyle={styles.text,styles.black}/>
+                    </Table>
+                </View>
+                {/* Information nutriscore */}
+                <View style={{alignSelf:'center'}}>
+                    <Text style={styles.nutriscore_Mauvais}>
+                        MAUVAIS
+                    </Text>
+                </View>
+                {/* Bouton Ajouter produit à sa consommation */}
+                <View style={{alignSelf:'center'}}>
+                        <Pressable onPress = {()=>{}}
+                        style={({pressed}) => [
+                            {
+                                width: 306,
+                                height: 58,
+                                borderRadius: 100,
+                                backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                            },]}>
+                            <View style={styles.textView}>
+                            <Text style = {styles.text, styles.white}>
+                                Ajouter à ma consommation
+                            </Text>
+                        </View>
+                    </Pressable>
+                </View>
+                </View>
+                </>
             ):(
+                <>
+                {/* Modal bas affichage up + image + titre */}
                 <ChevronUp style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(0);setModalState(true);}}/>
+                {/* View Image + Text */}
+                <View style={{felx:1, flexDirection:'row', justifyContent:'space-evenly'}}>
+                <View style={{width:'15%',height:'15%', marginLeft:'5%'}}> 
+                <ImageBackground source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
+                </View>
+                {/* View Titre + sous-titre */}
+                <View style={{felx:1, alignItems:'center'}}>
+                    <Text style={styles.title}>Title</Text>
+                    <Text style={styles.text,styles.black}>UnderTitle</Text>
+                </View>
+                </View>
+                </>
             )}
         </View>
       );
@@ -39,7 +112,7 @@ const TestSlider = () => {
             }}
           >
             <Button
-              title="Open Bottom Sheet"
+              title="Scan button"
               onPress={() => {sheetRef.current.snapTo(1);setModalState(false);}}
             />
           </View>
@@ -48,6 +121,7 @@ const TestSlider = () => {
             snapPoints={['70%', '15%', 0]}
             borderRadius={10}
             renderContent={renderContent}
+            initialSnap={2}
           />
         </>
       );
@@ -61,7 +135,6 @@ const styles = StyleSheet.create({
       backgroundColor: "#140078",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: 20,
       shadowColor: "#8559da",
       shadowOpacity: 0.7,
       shadowOffset: {
@@ -72,16 +145,45 @@ const styles = StyleSheet.create({
       elevation: 6,
     },
     text: {
-      color: "white",
-      fontWeight: "600",
+        fontFamily: "Andika",
+        fontWeight: "400",
+        textDecorationLine: "none",
+        fontSize: 15,
+        letterSpacing: 0.1,
     },
     container: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
     },
+    title: {
+        color: "black",
+        fontWeight: "800",        
+        fontSize: 20,
+        
+    },
+    nutriscore_Bon: {
+        color: "green",
+        fontWeight: "800",        
+        fontSize: 40,
+    },
+    nutriscore_Mauvais: {
+        color: "red",
+        fontWeight: "800",        
+        fontSize: 40,
+    },
+    white:{
+        color: "rgba(255,255,255,1)",
+    },
+    black:{
+        color: "rgba(0,0,0,1)",
+    },
+    textView:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
   });
-
 
   const ChevronUp = (props) => (
     <Svg
