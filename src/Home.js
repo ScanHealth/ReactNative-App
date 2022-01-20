@@ -1,5 +1,5 @@
 import { Center } from 'native-base';
-import React, {Component,useState, useContext} from 'react';
+import React, {Component,useRef,useState, useContext} from 'react';
 import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground,Image, Animated} from 'react-native';
 import LottieView from 'lottie-react-native';
 import CustomInput from './components/CustomInput';
@@ -8,15 +8,11 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from './context/AuthContext';
 
 
-import { Assets } from 'react-navigation-stack';
-import { exp } from 'react-native-reanimated';
-
-
 const Home = () => {
 
     const state = {
-        animation: new Animated.Value(0),
-        fadeAnimation: new Animated.Value(1)
+        animation: useRef(new Animated.Value(0)).current,
+        fadeAnimation: useRef(new Animated.Value(0)).current
     }
 
     const startAnimationGoUpRegister = () => {
@@ -39,7 +35,7 @@ const Home = () => {
     const startAnimationGoDown = () => {
         Animated.timing(state.animation,{
             toValue: 0,
-            duration: 1,
+            duration: 1000,
             useNativeDriver: false
         }).start(()=>{setRegisterInput(false),setLoginInput(false)});
     }
@@ -47,7 +43,7 @@ const Home = () => {
     const startAnimationFadeIn = () => {
         Animated.timing(state.fadeAnimation, {
             toValue: 1,
-            duration: 100,
+            duration: 1000,
             useNativeDriver: false
           }).start();
     }
@@ -55,7 +51,7 @@ const Home = () => {
     const startAnimationFadeOut = () => {
         Animated.timing(state.fadeAnimation, {
             toValue: 0,
-            duration: 100,
+            duration: 1000,
             useNativeDriver: false
           }).start();
     }
@@ -102,7 +98,7 @@ const Home = () => {
                 </ImageBackground>
                     <View style={homeStyleSheet._bouton_group,{position:'absolute',alignItems:'center',alignSelf:'center',marginTop:'100%'}}>    
                     {/* Button Register */}
-                    <Pressable onPress = {startAnimationGoUpRegister}
+                    <Pressable onPress = {()=>{setRegisterInput(true),setRegisterInput(false),startAnimationGoUpRegister(),startAnimationFadeIn()}}
                         style={({pressed}) => [
                             {
                                 width: 306,
@@ -130,7 +126,7 @@ const Home = () => {
                             },
                         
                         ]}
-                        onPress={startAnimationGoUpLogin}>
+                        onPress={()=>{startAnimationGoUpLogin(),startAnimationFadeIn()}}>
                         <View style={homeStyleSheet._TextView}>
                             <Text style = {homeStyleSheet._text, homeStyleSheet._black}>
                                 Se connecter
@@ -145,7 +141,7 @@ const Home = () => {
                 <Image source={require('../assets/scanhealthnoir.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
 
                 {/* Input Area */}
-                <View style={{alignItems:'center', marginTop:'50%'}}>
+                <Animated.View style={{alignItems:'center', marginTop:'50%', opacity:state.fadeAnimation} }>
                 {LoginInput ? (
                     <> 
                     {/* //Page Login */}
@@ -167,7 +163,7 @@ const Home = () => {
                             },
                         
                         ]}
-                        onPress={startAnimationGoDown}>
+                        onPress={()=>{startAnimationGoDown(),startAnimationFadeOut()}}>
                         <View style={homeStyleSheet._TextView}>
                             <Text style = {homeStyleSheet._text, homeStyleSheet._black}>
                                 Retour
@@ -200,7 +196,7 @@ const Home = () => {
                             },
                         
                         ]}
-                        onPress={startAnimationGoDown}>
+                        onPress={()=>{startAnimationGoDown(),startAnimationFadeOut()}}>
                         <View style={homeStyleSheet._TextView}>
                             <Text style = {homeStyleSheet._text, homeStyleSheet._black}>
                                 Retour
@@ -210,7 +206,7 @@ const Home = () => {
                     </>
                 )
                 : null} 
-                </View>
+                </Animated.View>
                 </View>
             </View>
         )
