@@ -24,7 +24,7 @@ const Splash = () => {
                 onAnimationFinish = {() =>{
                     console.log("Animation Finished.")
                     if(userInfo.token){
-                        navigation.replace('Scanner');
+                        navigation.replace('ScannerTab');
                     }else {
                         navigation.replace('LoginRegister');
                     }

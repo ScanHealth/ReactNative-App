@@ -49,12 +49,5 @@ const styles = StyleSheet.create({
   });
 
 
-<<<<<<< HEAD
-    return(
-        <View></View>
-    )
-}
-=======
->>>>>>> 3af51e93ed70735b813518ee67e8960651171503
 
 export default TestSlider;

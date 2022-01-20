@@ -88,12 +88,7 @@ const Home = () => {
       }
 
           return(
-<<<<<<< HEAD
-            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%'}}>         
-                <Spinner visible={isLoading}/>
-=======
             <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%',backgroundColor:'#486F3A'}}>                
->>>>>>> 3af51e93ed70735b813518ee67e8960651171503
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
                 <LottieView
