@@ -102,21 +102,31 @@ const TestSlider = () => {
         </View>
       );
 
-    
+    // Code page alimentation
       return (
         <>
           <View
             style={{
               flex: 1,
-              backgroundColor: 'papayawhip',
+              backgroundColor: '#D9EAC7',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <Button
-              title="Scan button"
-              onPress={() => {sheetRef.current.snapTo(1);setModalState(false);}}
-            />
+            <Pressable onPress = {()=>{sheetRef.current.snapTo(0);setModalState(true);}}
+                        style={({pressed}) => [
+                            {
+                                width: 306,
+                                height: 58,
+                                borderRadius: 100,
+                                backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                            },]}>
+                            <View style={styles.textView}>
+                            <Text style = {styles.text, styles.white}>
+                                Voir détail du produit
+                            </Text>
+                        </View>
+                    </Pressable>
           </View>
           <BottomSheet
             ref={sheetRef}

@@ -45,8 +45,8 @@ const TestSlider = () => {
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{ alignItems:'center'}}>
-                    <Text style={styles.title}>Title</Text>
-                    <Text style={styles.text,styles.black}>UnderTitle</Text>
+                    <Text style={styles.title}>Nutella</Text>
+                    <Text style={styles.text,styles.black}>750g</Text>
                 </View>
                 </View>
                 <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
@@ -92,8 +92,8 @@ const TestSlider = () => {
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{felx:1, alignItems:'center'}}>
-                    <Text style={styles.title}>Title</Text>
-                    <Text style={styles.text,styles.black}>UnderTitle</Text>
+                    <Text style={styles.title}>Nutella</Text>
+                    <Text style={styles.text,styles.black}>750g</Text>
                 </View>
                 </View>
                 </>
@@ -107,7 +107,7 @@ const TestSlider = () => {
           <View
             style={{
               flex: 1,
-              backgroundColor: 'papayawhip',
+              backgroundColor: '#D9EAC7',
               alignItems: 'center',
               justifyContent: 'center',
             }}
