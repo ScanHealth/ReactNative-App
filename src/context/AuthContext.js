@@ -62,6 +62,11 @@ export const AuthProvider = ({children}) => {
         })
     };
 
+    const DebugLogout = () => {
+        AsyncStorage.removeItem('userInfo')
+        setUserInfo({});
+    }
+
     const isLoggedIn = async () => {
         try {
             let userInfo = await AsyncStorage.getItem('userInfo');
@@ -81,6 +86,6 @@ export const AuthProvider = ({children}) => {
     }, []);
     
     return (
-        <AuthContext.Provider value={{isLoading, userInfo, register, login, logout}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{isLoading, userInfo, register, login, logout, DebugLogout}}>{children}</AuthContext.Provider>
     );
 };

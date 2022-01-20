@@ -22,7 +22,6 @@ const Splash = () => {
                 speed = {2}
                 loop = {false}
                 onAnimationFinish = {() =>{
-                    console.log("Animation Finished.")
                     if(userInfo.token){
                         navigation.replace('ScannerTab');
                     }else {
