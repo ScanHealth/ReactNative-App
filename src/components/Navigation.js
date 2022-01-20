@@ -4,6 +4,7 @@ import Splash from '../Splash';
 import HomeScreen from '../Home';
 import ScannerScreen from '../Scanner';
 import TestSlider from '../TestSlider';
+import Alimentation from '../Alimentation';
 import LoginRegister from '../LoginRegister';
 import React, {Component, useContext} from 'react';
 import { Button, Center, NativeBaseProvider } from "native-base";
@@ -29,6 +30,7 @@ const Navigation = () => {
                 <Stack.Screen name="Splash" component={Splash}/>
                 <Stack.Screen name="LoginRegister" component={LoginRegister} />
                 <Stack.Screen name="TestSlider" component={TestSlider}/>
+                <Stack.Screen name="Alimentation" component={Alimentation}/>
                 </>
              )}
             </Stack.Navigator>

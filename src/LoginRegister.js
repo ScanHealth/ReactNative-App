@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Home';
 import {AuthContext} from './context/AuthContext';
 import TestSlider from './TestSlider';
+import Alimentation from './Alimentation'
 
 
 const Tab = createBottomTabNavigator();
@@ -18,6 +19,7 @@ export default function LoginRegister() {
         }}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Test" component={TestSlider} />
+        <Tab.Screen name="Alimentation" component={Alimentation}/>
       </Tab.Navigator>
   );
 }

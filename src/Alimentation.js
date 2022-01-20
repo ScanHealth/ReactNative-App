@@ -26,6 +26,7 @@ const TestSlider = () => {
         ]
       }
 
+    //Code Bottom sheet
     const renderContent = () => (
         <View
             style={{
