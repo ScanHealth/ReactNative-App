@@ -2,15 +2,43 @@ import React, {Component,useState, useContext, useRef } from 'react';
 import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import {Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import moment, {today} from 'moment';
 
 
 
-const TestSlider = () => {
+const Alimentation = () => {
     
     const [ModalState, setModalState] = useState(false);
-        
+
+    const [LundiState, setLundiState] = useState(false);
+    const [MardiState, setMardiState] = useState(false);
+    const [MercrediState, setMercrediState] = useState(false);
+    const [JeudiState, setJeudiState] = useState(false);
+    const [VendrediState, setVendrediState] = useState(false);
+    const [SamediState, setSamediState] = useState(false);
+    const [DimancheState, setDimancheState] = useState(false); 
+    
     const sheetRef = React.useRef(null);
+
+    // Variable date
+    const Day= () =>{
+        if(moment().format('dddd') == 'Monday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setLundiState(true)
+        }else if(moment().format('dddd') == 'Tuesday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setMardiState(true)
+        }else if(moment().format('dddd') == 'Wednesday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setMercrediState(true)
+        }else if(moment().format('dddd') == 'Thursday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setJeudiState(true)
+        }else if(moment().format('dddd') == 'Friday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setVendrediState(true)
+        }else if(moment().format('dddd') == 'Saturday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setSamediState(true)
+        }else if(moment().format('dddd') == 'Sunday' && !LundiState && !MardiState && !MercrediState && !JeudiState && !VendrediState && !SamediState && !DimancheState){
+            setDimancheState(true)
+        }}
+    
 
     // Emplacement information tableau nutritif
     const state = {
@@ -23,18 +51,12 @@ const TestSlider = () => {
           ['Fibres', ''],
           ['Protéines', '0.9g'],
           ['Sel', '0.016g']
-        ]
+        ],
       }
 
     //Code Bottom sheet
-    const renderContent = () => (
-        <View
-            style={{
-                backgroundColor: 'white',
-                padding: '1%',
-                height: '100%',
-            }}
-        >
+    const BottomSheetModal = () => (
+        <View style={{backgroundColor: 'white',padding: '1%',height: '100%',}}>
             {ModalState ? (
                 <>
                 {/* Modal haut affichage down + image + titre + details */}
@@ -105,34 +127,104 @@ const TestSlider = () => {
     // Code page alimentation
       return (
         <>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: '#D9EAC7',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+        {Day()}
+          <View style={{flex: 1,backgroundColor: '#F0F0F0',alignItems: 'center',justifyContent: 'flex-start',}}>
+            {/* Titre view */}
+            <View>
+                <Text style={{fontSize:40, color:'black'}}>Nutrition</Text>
+            </View>
+            {/* Alimentation journalière View groupe */}
+            <View style={{alignItems:'center'}}>
+                {/* Button selection jour View groupe */}
+                <View style={{flexDirection: 'row',alignItems:'flex-end',justifyContent:'center'}}>
+                    {/* Lundi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(true),setMardiState(false),setMercrediState(false),setJeudiState(false),setVendrediState(false),setSamediState(false),setDimancheState(false)}} 
+                        style={({pressed}) => [LundiState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>L</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Mardi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(true),setMercrediState(false),setJeudiState(false),setVendrediState(false),setSamediState(false),setDimancheState(false)}} 
+                        style={({pressed}) => [MardiState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>M</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Mercredi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(false),setMercrediState(true),setJeudiState(false),setVendrediState(false),setSamediState(false),setDimancheState(false)}} 
+                        style={({pressed}) => [MercrediState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>M</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Jeudi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(false),setMercrediState(false),setJeudiState(true),setVendrediState(false),setSamediState(false),setDimancheState(false)}} 
+                        style={({pressed}) => [JeudiState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>J</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Vendredi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(false),setMercrediState(false),setJeudiState(false),setVendrediState(true),setSamediState(false),setDimancheState(false)}} 
+                        style={({pressed}) => [VendrediState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>V</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Samedi button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(false),setMercrediState(false),setJeudiState(false),setVendrediState(false),setSamediState(true),setDimancheState(false)}} 
+                        style={({pressed}) => [SamediState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>S</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                    {/* Dimanche button View */}
+                    <View>
+                        <Pressable onPress = {()=>{setLundiState(false),setMardiState(false),setMercrediState(false),setJeudiState(false),setVendrediState(false),setSamediState(false),setDimancheState(true)}} 
+                        style={({pressed}) => [DimancheState ? (styles.dateSelect) : (styles.dateNotSelect),{backgroundColor: pressed ? '#A09783' : '#BCB19A',},]}>
+                            <View style={styles.textView}>
+                                <Text style = {styles.text, styles.white}>D</Text>
+                            </View>
+                        </Pressable>
+                    </View>
+                </View>
+                {/* information consomation simple View */}
+                <View style={{backgroundColor:'white', borderRadius:30}}>
+                <Text>test</Text>
+                </View>
+            </View>
             <Pressable onPress = {()=>{sheetRef.current.snapTo(0);setModalState(true);}}
-                        style={({pressed}) => [
-                            {
+                        style={({pressed}) => [{
                                 width: 306,
                                 height: 58,
                                 borderRadius: 100,
                                 backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
                             },]}>
-                            <View style={styles.textView}>
+                        <View style={styles.textView}>
                             <Text style = {styles.text, styles.white}>
                                 Voir détail du produit
                             </Text>
                         </View>
-                    </Pressable>
+                </Pressable>
           </View>
           <BottomSheet
             ref={sheetRef}
             snapPoints={['70%', '15%', 0]}
             borderRadius={10}
-            renderContent={renderContent}
+            renderContent={BottomSheetModal}
             initialSnap={2}
           />
         </>
@@ -194,7 +286,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    dateSelect:{
+        width: 30,
+        height: 50,
+        borderTopStartRadius: 30,
+        borderTopRightRadius: 30,
+        marginHorizontal:'2%',
+    },
+    dateNotSelect:{
+        width: 30,
+        height: 30,
+        borderTopStartRadius: 0,
+        borderTopRightRadius: 0,        
+        marginHorizontal:'2%',
+    },
   });
 
   const ChevronUp = (props) => (
@@ -255,7 +361,7 @@ const styles = StyleSheet.create({
     </Svg>
   )
 
-export default TestSlider;
+export default Alimentation;
 
 /*
 Différente fonction importante pour le modal

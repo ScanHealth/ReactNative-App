@@ -138,10 +138,10 @@ const Home = () => {
 
                 {/* Logo view */}
                 <View style={homeStyleSheet._bouton_group,{position:'absolute',top:20,left:0,bottom:0,right:0,backgroundColor:'486F3A'}}>                
-                <Image source={require('../assets/scanhealthnoir.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:20 }}/>
+                <Image source={require('../assets/scanhealthnoir.png')} style={{alignSelf:'center',width: 300, height: 150, marginTop:'3%' }}/>
 
                 {/* Input Area */}
-                <Animated.View style={{alignItems:'center', marginTop:'50%', opacity:state.fadeAnimation} }>
+                <Animated.View style={{alignItems:'center', marginTop:'40%', opacity:state.fadeAnimation} }>
                 {LoginInput ? (
                     <> 
                     {/* //Page Login */}
