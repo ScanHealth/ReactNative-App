@@ -3,7 +3,8 @@ import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, I
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import moment, {today} from 'moment';
+import  {today} from 'moment';
+import moment from 'moment/min/moment-with-locales'
 
 
 
@@ -202,8 +203,8 @@ const Alimentation = () => {
                     </View>
                 </View>
                 {/* information consomation simple View */}
-                <View style={{backgroundColor:'white', borderRadius:30}}>
-                <Text>test</Text>
+                <View style={{backgroundColor:'white', borderRadius:30, padding:'5%'}}>
+                <Text style={{color:'black'}}>{moment.locale('fr'), moment().format("dddd D MMMM")}</Text>
                 </View>
             </View>
             <Pressable onPress = {()=>{sheetRef.current.snapTo(0);setModalState(true);}}
