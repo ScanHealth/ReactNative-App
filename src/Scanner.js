@@ -71,8 +71,8 @@ const CameraApp = () => {
         })
 
         setImage(`${ProductInfo.product.image_front_small_url}`);
-        setTitle(`${ProductInfo.product.ecoscore_data.agribalyse.name_fr}`);
-        setSubTitle(`${ProductInfo.product.product_name_fr}`);
+        setTitle(`${ProductInfo.product.product_name_fr}`);
+        setSubTitle(`${ProductInfo.product.brands}`);
 
         setIsOpen(true)
         sheetRef.current.snapTo(1);setModalState(false);
@@ -140,8 +140,8 @@ const CameraApp = () => {
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{ alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>{Product.product.ecoscore_data.agribalyse.name_fr}</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.product_name_fr}</Text>
+                    <Text style={styles_Slider.title}>{Product.product.product_name_fr}</Text>
+                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.brands}</Text>
                 </View>
                 </View>
                 <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
