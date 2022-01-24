@@ -16,7 +16,7 @@ LogBox.ignoreLogs(['Reanimated 2']);
 export default function App() {
   return (
     <AuthProvider>
-      <Navigation/>
+        <Navigation/>
     </AuthProvider>
   );
 }
