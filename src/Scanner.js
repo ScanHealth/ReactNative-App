@@ -7,6 +7,8 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import axios from 'axios';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 
 const CameraApp = () => {
@@ -23,7 +25,14 @@ const CameraApp = () => {
     let [barcodeArray, setBarcodeArray] = useState([])
     let [Product, setProduct] = useState({});
 
-    useEffect(() => {
+    let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
+    let [Title, setTitle] = useState('Undefined');
+    let [SubTitle, setSubTitle] = useState('Undefined')
+
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => { 
         Permissions.check('photo').then(response => {
         // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
         setPermission(response);
@@ -42,6 +51,8 @@ const CameraApp = () => {
     }
 
     const getDataOfProduct = (scanResult) => {
+      setIsLoading(true);
+
       axios.get(`https://world.openfoodfacts.org/api/v0/product/${scanResult}.json`)
       .then(res => {    
         let ProductInfo = res.data;
@@ -58,8 +69,15 @@ const CameraApp = () => {
             ['Sel', `${Math.round(ProductInfo.product.nutriments.salt_100g * 10) / 10}`]
           ]
         })
+
+        setImage(`${ProductInfo.product.image_front_small_url}`);
+        setTitle(`${ProductInfo.product.ecoscore_data.agribalyse.name_fr}`);
+        setSubTitle(`${ProductInfo.product.product_name_fr}`);
+
         setIsOpen(true)
         sheetRef.current.snapTo(1);setModalState(false);
+
+        setIsLoading(false);
       }).catch(e => {
           console.log(`Register error ${e}`)
         
@@ -118,11 +136,11 @@ const CameraApp = () => {
                 <View style={{justifyContent:'space-between',flexDirection:'column'}}>
                 <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
-                <Image source={{uri: `${Product.product.image_front_small_url}`}} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
+                  <ImageBackground source={{uri: `${Image}`}} style={{width: 100, height: 100}} resizeMode="stretch"></ImageBackground>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{ alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>{Product.product.name_fr}</Text>
+                    <Text style={styles_Slider.title}>{Product.product.ecoscore_data.agribalyse.name_fr}</Text>
                     <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.product_name_fr}</Text>
                 </View>
                 </View>
@@ -160,16 +178,17 @@ const CameraApp = () => {
             ):(
                 <>
                 {/* Modal bas affichage up + image + titre */}
+                <Spinner visible={isLoading}/>
                 <ChevronUp style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(0);setModalState(true);}}/>
                 {/* View Image + Text */}
                 <View style={{felx:1, flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginLeft:'5%'}}> 
-                <ImageBackground source={{uri: `${Product.product.image_front_small_url}`}} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
+                  <ImageBackground source={{uri: `${Image}`}} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{felx:1, alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>{Product.product.name_fr}</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.product_name_fr}</Text>
+                    <Text style={styles_Slider.title}>{Title}</Text>
+                    <Text style={styles_Slider.text,styles_Slider.black}>{SubTitle}</Text>
                 </View>
                 </View>
                 </>
