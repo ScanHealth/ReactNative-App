@@ -137,7 +137,7 @@ const TestSlider = () => {
     }
     ;
 
-const styles = StyleSheet.create({
+const styles_Slider = StyleSheet.create({
     button: {
       height: 50,
       width: 150,
@@ -256,8 +256,5 @@ export default TestSlider;
 
 /*
 Différente fonction importante pour le modal
-
 onPress={() => sheetRef.current.snapTo(0)} -> Fait pop le modal à son premier point d'accroche
-
-
 */
