@@ -84,12 +84,12 @@ const Home = () => {
       }
 
           return(
-            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '110%',backgroundColor:'#486F3A'}}>         
+            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '115%',backgroundColor:'#486F3A'}}>         
                 <Spinner visible={isLoading}/>
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
                 <LottieView
-                source={require('../assets/fruits.json')}
+                source={require('../assets/HomeAnim.json')}
                 autoPlay
                 speed = {1.4}
                 loop = {true}

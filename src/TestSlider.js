@@ -26,6 +26,20 @@ const TestSlider = () => {
         ]
       }
 
+      const Product = {
+        Image: require('../assets/Exemple_Image_Scan.jpg'),
+        Titre: 'Nutella',
+        SousTitre: '750g',
+        Energie: 80,
+        MatiereGrasse: 4.1,
+        AcidesGrasSature: 0.5,
+        GlucideDontSucre: 8.9,
+        Fibre: 0,
+        Proteines: 0.9,
+        Sel: 0.016,
+        NutriScore: 0,
+    }
+
     const BottomSheetModal = () => (
         <View style={{backgroundColor: 'white',padding: '1%',height: '100%',}}>
             {ModalState ? (
@@ -35,12 +49,12 @@ const TestSlider = () => {
                 <View style={{justifyContent:'space-between',flexDirection:'column'}}>
                 <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
-                <Image source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
+                <Image source={Product.Image} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{ alignItems:'center'}}>
-                    <Text style={styles.title}>Nutella</Text>
-                    <Text style={styles.text,styles.black}>750g</Text>
+                    <Text style={styles.title}>{Product.Titre}</Text>
+                    <Text style={styles.text,styles.black}>{Product.SousTitre}</Text>
                 </View>
                 </View>
                 <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
@@ -82,12 +96,12 @@ const TestSlider = () => {
                 {/* View Image + Text */}
                 <View style={{felx:1, flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginLeft:'5%'}}> 
-                <ImageBackground source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
+                <ImageBackground source={Product.Image} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{felx:1, alignItems:'center'}}>
-                    <Text style={styles.title}>Nutella</Text>
-                    <Text style={styles.text,styles.black}>750g</Text>
+                    <Text style={styles.title}>{Product.Titre}</Text>
+                    <Text style={styles.text,styles.black}>{Product.SousTitre}</Text>
                 </View>
                 </View>
                 </>

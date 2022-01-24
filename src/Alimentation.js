@@ -1,5 +1,5 @@
 import React, {Component,useState, useContext, useRef } from 'react';
-import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight } from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight, useColorScheme } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -53,6 +53,14 @@ const Alimentation = () => {
           ['Protéines', '0.9g'],
           ['Sel', '0.016g']
         ],
+      }
+
+      const Alimentation = {
+          ResultatAlimDay: 500,
+          ResultatAlimWeek: 54000,
+          MaxAlimDay: 2300,
+          MinAlimDay: 2100,
+          MaxAlimWeek: 15400,
       }
 
     //Code Bottom sheet
@@ -203,10 +211,22 @@ const Alimentation = () => {
                     </View>
                 </View>
                 {/* information consomation simple View */}
-                <View style={{backgroundColor:'white', borderRadius:30, padding:'5%'}}>
+                <View style={{backgroundColor:'white', borderRadius:30, padding:'5%', alignItems:'center'}}>
                 <Text style={{color:'black'}}>{moment.locale('fr'), moment().format("dddd D MMMM")}</Text>
+                {/* Jauge alimentation */}
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                    <Text style={{color:'black',fontSize: 20,}}>{Alimentation.MinAlimDay}{" Kcal <"} </Text>
+                    <Text style={{color:'black',fontSize: 40, color: Alimentation.ResultatAlimDay > Alimentation.MaxAlimDay ? 'red' : 'green'}}>{Alimentation.ResultatAlimDay}</Text>
+                    <Text style={{color:'black',fontSize: 20,}}>{" < "}{Alimentation.MaxAlimDay}{" Kcal"}</Text>
+                </View>
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                    <Text style={{color:'black',fontSize: 30, color: Alimentation.ResultatAlimWeek > Alimentation.MaxAlimWeek ? 'red' : 'green'}}>{Alimentation.ResultatAlimWeek}</Text>
+                    <Text style={{color:'black',fontSize: 20,}}>{" < "}{Alimentation.MaxAlimWeek}{" Kcal"}</Text>
+                </View>
                 </View>
             </View>
+
+
             <Pressable onPress = {()=>{sheetRef.current.snapTo(0);setModalState(true);}}
                         style={({pressed}) => [{
                                 width: 306,
@@ -293,14 +313,14 @@ const styles = StyleSheet.create({
         height: 50,
         borderTopStartRadius: 30,
         borderTopRightRadius: 30,
-        marginHorizontal:'2%',
+        marginHorizontal:'1%',
     },
     dateNotSelect:{
         width: 30,
         height: 30,
         borderTopStartRadius: 0,
         borderTopRightRadius: 0,        
-        marginHorizontal:'2%',
+        marginHorizontal:'1%',
     },
   });
 
