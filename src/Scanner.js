@@ -132,7 +132,7 @@ const CameraApp = () => {
             {ModalState ? (
                 <>
                 {/* Modal haut affichage down + image + titre + details */}
-                <ChevronDown style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(2);setModalState(false); setIsOpen(false)}}/>
+                <ChevronDown style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(2);setModalState(false); setIsOpen(false),setBarcodeArray([])}}/>
                 <View style={{justifyContent:'space-between',flexDirection:'column'}}>
                 <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
