@@ -1,5 +1,5 @@
 import React, {Component,useState, useContext, useRef } from 'react';
-import {View, Text, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight, useColorScheme } from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Pressable,FlatList, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight, useColorScheme } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
 import {Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -62,6 +62,40 @@ const Alimentation = () => {
           MinAlimDay: 2100,
           MaxAlimWeek: 15400,
       }
+
+      const ConsumeList = [
+        {
+            id: '1',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '2',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Chips',
+        },
+        {
+            id: '3',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+      ];
+
+      const Item = ({ title,image }) => (
+        <View style={{flexDirection:'row',alignItems:'center'}}>
+            <View /*style={{}}*/>
+            <Image source={image}  resizeMode="contain"></Image>
+            </View>
+            <View /*style={{}}*/>
+            <Text style={styles.text,styles.black}>{title}</Text>
+            </View>
+        </View>
+      );
+
+      const renderItem = ({ item }) => (
+        <Item title={item.title} image={item.image} />
+      );
+      
 
     //Code Bottom sheet
     const BottomSheetModal = () => (
@@ -226,6 +260,22 @@ const Alimentation = () => {
                 </View>
             </View>
 
+{/* Fin temporaire view générale */}
+            </View>
+
+
+            {/* FlatList and Button group */}
+            <View>
+            {/* FlatList Consomation */}
+            <View style={{backgroundColor:'white',alignItems:'center',justifyContent:'space-between'}}>
+            <FlatList
+                data={ConsumeList}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                scrollEnabled={true}
+            />
+            </View>
+            </View>
 
             <Pressable onPress = {()=>{sheetRef.current.snapTo(0);setModalState(true);}}
                         style={({pressed}) => [{
@@ -240,7 +290,7 @@ const Alimentation = () => {
                             </Text>
                         </View>
                 </Pressable>
-          </View>
+          
           <BottomSheet
             ref={sheetRef}
             snapPoints={['70%', '15%', 0]}
@@ -321,6 +371,11 @@ const styles = StyleSheet.create({
         borderTopStartRadius: 0,
         borderTopRightRadius: 0,        
         marginHorizontal:'1%',
+    },
+    textView:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
   });
 
