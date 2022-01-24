@@ -13,48 +13,48 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const CameraApp = () => {
 
-    let [flash, setFlash] = useState('off')
-    let [toggleModal, setModal] = useState(true)
-    let [zoom, setZoom] = useState(0)
-    let [autoFocus, setAutoFocus] = useState('on')
-    let [depth, setDepth] = useState(0)
-    let [type, setType] = useState('back')
-    let [permission, setPermission] = useState('undetermined')
-    let [isOpen, setIsOpen] = useState(false)
-    let cameraRef = useRef(null)
-    let [barcodeArray, setBarcodeArray] = useState([])
-    let [Product, setProduct] = useState({});
+  let [flash, setFlash] = useState('off')
+  let [toggleModal, setModal] = useState(true)
+  let [zoom, setZoom] = useState(0)
+  let [autoFocus, setAutoFocus] = useState('on')
+  let [depth, setDepth] = useState(0)
+  let [type, setType] = useState('back')
+  let [permission, setPermission] = useState('undetermined')
+  let [isOpen, setIsOpen] = useState(false)
+  let cameraRef = useRef(null)
+  let [barcodeArray, setBarcodeArray] = useState([])
+  let [Product, setProduct] = useState({});
 
-    let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
-    let [Title, setTitle] = useState('Undefined');
-    let [SubTitle, setSubTitle] = useState('Undefined')
+  let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
+  let [Title, setTitle] = useState('Undefined');
+  let [SubTitle, setSubTitle] = useState('Undefined')
 
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
 
-    useEffect(() => { 
-        Permissions.check('photo').then(response => {
-        // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-        setPermission(response);
-        });
-    }, []);
-    
+  useEffect(() => {
+    Permissions.check('photo').then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      setPermission(response);
+    });
+  }, []);
 
-    const toggleFlash = () => {
-        setFlash(flashModeOrder[flash])
-    }
-    const zoomOut = () => {
-        setZoom(zoom - 0.1 < 0 ? 0 : zoom - 0.1)
-    }
-    const zoomIn = () => {    
-        setZoom(zoom + 0.1 > 1 ? 1 : zoom + 0.1);
-    }
 
-    const getDataOfProduct = (scanResult) => {
-      setIsLoading(true);
+  const toggleFlash = () => {
+    setFlash(flashModeOrder[flash])
+  }
+  const zoomOut = () => {
+    setZoom(zoom - 0.1 < 0 ? 0 : zoom - 0.1)
+  }
+  const zoomIn = () => {
+    setZoom(zoom + 0.1 > 1 ? 1 : zoom + 0.1);
+  }
 
-      axios.get(`https://world.openfoodfacts.org/api/v0/product/${scanResult}.json`)
-      .then(res => {    
+  const getDataOfProduct = (scanResult) => {
+    setIsLoading(true);
+
+    axios.get(`https://world.openfoodfacts.org/api/v0/product/${scanResult}.json`)
+      .then(res => {
         let ProductInfo = res.data;
         setProduct(ProductInfo);
         setState({
@@ -75,128 +75,128 @@ const CameraApp = () => {
         setSubTitle(`${ProductInfo.product.brands}`);
 
         setIsOpen(true)
-        sheetRef.current.snapTo(1);setModalState(false);
+        sheetRef.current.snapTo(1); setModalState(false);
 
         setIsLoading(false);
       }).catch(e => {
-          console.log(`Register error ${e}`)
-        
+        console.log(`Register error ${e}`)
+
       });
+  }
+
+  const onBarCodeRead = (scanResult) => {
+    console.log(barcodeArray);
+    if (barcodeArray.length > 0 && isOpen) {
+      setBarcodeArray([])
     }
 
-    const onBarCodeRead = (scanResult) => {
-      console.log(barcodeArray);
-      if(barcodeArray.length > 0 && isOpen) {
-        setBarcodeArray([])
+    if (scanResult.data != null && !isOpen) {
+      if (!barcodeArray.includes(scanResult.data)) {
+        barcodeArray.push(scanResult.data);
+        getDataOfProduct(scanResult.data);
+        console.log('onBarCodeRead call');
       }
-  
-      if (scanResult.data != null && !isOpen) {
-        if (!barcodeArray.includes(scanResult.data)) {
-          barcodeArray.push(scanResult.data);
-          getDataOfProduct(scanResult.data);
-          console.log('onBarCodeRead call');
-        }
-        else {
-          return;
-        }
+      else {
+        return;
       }
-      return;
     }
+    return;
+  }
 
 
-    const [ModalState, setModalState] = useState(false);
-        
-    const sheetRef = React.useRef(null);
+  const [ModalState, setModalState] = useState(false);
 
-    const [state, setState] = useState({
-        tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de ?g'],
-        tableData: [
-          ['Énergie', '80 Kcal'],
-          ['Matière grasses', '4.1g'],
-          ['Acides gras saturés', '0.5g'],
-          ['Glucide dont sucre', '0.6g'],
-          ['Fibres', ''],
-          ['Protéines', '0.9g'],
-          ['Sel', '0.016g']
-        ]
-      })
+  const sheetRef = React.useRef(null);
 
-    const renderContent = () => (
-        <View
-            style={{
-                backgroundColor: 'white',
-                padding: '1%',
-                height: '100%',
-            }}
-        >
-            {ModalState ? (
-                <>
-                {/* Modal haut affichage down + image + titre + details */}
-                <ChevronDown style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(2);setModalState(false); setIsOpen(false),setBarcodeArray([])}}/>
-                <View style={{justifyContent:'space-between',flexDirection:'column'}}>
-                <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
-                <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
-                  <ImageBackground source={{uri: `${Image}`}} style={{width: 100, height: 100}} resizeMode="stretch"></ImageBackground>
-                </View>
-                {/* View Titre + sous-titre */}
-                <View style={{ alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>{Product.product.product_name_fr}</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.brands}</Text>
-                </View>
-                </View>
-                <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
-                {/* View tableau information */}
-                    <Table borderStyle={{borderWidth: 0, borderColor: '#c8e1ff'}}>
-                       <Row data={state.tableHead} style={styles_Slider.head} textStyle={styles_Slider.text,styles_Slider.black}/>
-                        <Rows data={state.tableData} textStyle={styles_Slider.text,styles_Slider.black}/>
-                    </Table>
-                </View>
-                {/* Information nutriscore */}
-                <View style={{alignSelf:'center'}}>
-                    <Text style={styles_Slider.nutriscore_Mauvais}>
-                    </Text>
-                </View>
-                {/* Bouton Ajouter produit à sa consommation */}
-                <View style={{alignSelf:'center'}}>
-                        <Pressable onPress = {()=>{}}
-                        style={({pressed}) => [
-                            {
-                                width: 306,
-                                height: 58,
-                                borderRadius: 100,
-                                backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
-                            },]}>
-                            <View style={styles_Slider.textView}>
-                            <Text style = {styles_Slider.text, styles_Slider.white}>
-                                Ajouter à ma consommation
-                            </Text>
-                        </View>
-                    </Pressable>
-                </View>
-                </View>
-                </>
-            ):(
-                <>
-                {/* Modal bas affichage up + image + titre */}
-                <Spinner visible={isLoading}/>
-                <ChevronUp style={{width: '10%', height: '10%', alignSelf: 'center'}} onPress={() => {sheetRef.current.snapTo(0);setModalState(true);}}/>
-                {/* View Image + Text */}
-                <View style={{felx:1, flexDirection:'row', justifyContent:'space-evenly'}}>
-                <View style={{width:'15%',height:'15%', marginLeft:'5%'}}> 
-                  <ImageBackground source={{uri: `${Image}`}} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
-                </View>
-                {/* View Titre + sous-titre */}
-                <View style={{felx:1, alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>{Title}</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>{SubTitle}</Text>
-                </View>
-                </View>
-                </>
-            )}
-        </View>
-      );
+  const [state, setState] = useState({
+    tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de ?g'],
+    tableData: [
+      ['Énergie', '80 Kcal'],
+      ['Matière grasses', '4.1g'],
+      ['Acides gras saturés', '0.5g'],
+      ['Glucide dont sucre', '0.6g'],
+      ['Fibres', ''],
+      ['Protéines', '0.9g'],
+      ['Sel', '0.016g']
+    ]
+  })
 
-        const ChevronUp = (props) => (
+  const renderContent = () => (
+    <View
+      style={{
+        backgroundColor: 'white',
+        padding: '1%',
+        height: '100%',
+      }}
+    >
+      {ModalState ? (
+        <>
+          {/* Modal haut affichage down + image + titre + details */}
+          <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2); setModalState(false); setIsOpen(false), setBarcodeArray([]) }} />
+          <View style={{ justifyContent: 'space-between', flexDirection: 'column' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <View style={{ width: '15%', height: '15%', marginBottom: '-20%' }}>
+                <ImageBackground source={{ uri: `${Image}` }} style={{ width: 100, height: 100 }} resizeMode="stretch"></ImageBackground>
+              </View>
+              {/* View Titre + sous-titre */}
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles_Slider.title}>{Product.product.product_name_fr}</Text>
+                <Text style={styles_Slider.text, styles_Slider.black}>{Product.product.brands}</Text>
+              </View>
+            </View>
+            <View style={{ padding: '5%', backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 0 }}>
+              {/* View tableau information */}
+              <Table borderStyle={{ borderWidth: 0, borderColor: '#c8e1ff' }}>
+                <Row data={state.tableHead} style={styles_Slider.head} textStyle={styles_Slider.text, styles_Slider.black} />
+                <Rows data={state.tableData} textStyle={styles_Slider.text, styles_Slider.black} />
+              </Table>
+            </View>
+            {/* Information nutriscore */}
+            <View style={{ alignSelf: 'center' }}>
+              <Text style={styles_Slider.nutriscore_Mauvais}>
+              </Text>
+            </View>
+            {/* Bouton Ajouter produit à sa consommation */}
+            <View style={{ alignSelf: 'center' }}>
+              <Pressable onPress={() => { }}
+                style={({ pressed }) => [
+                  {
+                    width: 306,
+                    height: 58,
+                    borderRadius: 100,
+                    backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                  },]}>
+                <View style={styles_Slider.textView}>
+                  <Text style={styles_Slider.text, styles_Slider.white}>
+                    Ajouter à ma consommation
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          </View>
+        </>
+      ) : (
+        <>
+          {/* Modal bas affichage up + image + titre */}
+          <Spinner visible={isLoading} />
+          <ChevronUp style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(0); setModalState(true); }} />
+          {/* View Image + Text */}
+          <View style={{ felx: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <View style={{ width: '15%', height: '15%', marginLeft: '5%' }}>
+              <ImageBackground source={{ uri: `${Image}` }} style={{ width: '100%', height: '170%' }} resizeMode="stretch"></ImageBackground>
+            </View>
+            {/* View Titre + sous-titre */}
+            <View style={{ felx: 1, alignItems: 'center' }}>
+              <Text style={styles_Slider.title}>{Title}</Text>
+              <Text style={styles_Slider.text, styles_Slider.black}>{SubTitle}</Text>
+            </View>
+          </View>
+        </>
+      )}
+    </View>
+  );
+
+  const ChevronUp = (props) => (
     <Svg
       viewBox="0 0 240 240"
       xmlns="http://www.w3.org/2000/svg"
@@ -254,36 +254,36 @@ const CameraApp = () => {
     </Svg>
   )
 
-    return (
-      <>
+  return (
+    <>
 
-        <View style={styles.container}>
-          <RNCamera
-            ref={cameraRef}
-            style={styles.preview}
-            type={type}
-            captureAudio={false}
-            flashMode={flash}
-            onBarCodeRead={onBarCodeRead}
-          />
-          <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-            
-          </View>
-    
-      
+      <View style={styles.container}>
+        <RNCamera
+          ref={cameraRef}
+          style={styles.preview}
+          type={type}
+          captureAudio={false}
+          flashMode={flash}
+          onBarCodeRead={onBarCodeRead}
+        />
+        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+
         </View>
 
-        <BottomSheet
-            ref={sheetRef}
-            snapPoints={['70%', '15%', 0]}
-            borderRadius={10}
-            renderContent={renderContent}
-            initialSnap={2}
-          />
-      </> 
-    ) 
 
-    
+      </View>
+
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={['70%', '15%', 0]}
+        borderRadius={10}
+        renderContent={renderContent}
+        initialSnap={2}
+      />
+    </>
+  )
+
+
 }
 
 /*
@@ -299,61 +299,61 @@ const CameraApp = () => {
 export default CameraApp
 
 const styles_Slider = StyleSheet.create({
-    button: {
-      height: 50,
-      width: 150,
-      backgroundColor: "#140078",
-      justifyContent: "center",
-      alignItems: "center",
-      shadowColor: "#8559da",
-      shadowOpacity: 0.7,
-      shadowOffset: {
-        height: 4,
-        width: 4,
-      },
-      shadowRadius: 5,
-      elevation: 6,
+  button: {
+    height: 50,
+    width: 150,
+    backgroundColor: "#140078",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#8559da",
+    shadowOpacity: 0.7,
+    shadowOffset: {
+      height: 4,
+      width: 4,
     },
-    text: {
-        fontFamily: "Andika",
-        fontWeight: "400",
-        textDecorationLine: "none",
-        fontSize: 15,
-        letterSpacing: 0.1,
-    },
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    title: {
-        color: "black",
-        fontWeight: "800",        
-        fontSize: 20,
-        
-    },
-    nutriscore_Bon: {
-        color: "green",
-        fontWeight: "800",        
-        fontSize: 40,
-    },
-    nutriscore_Mauvais: {
-        color: "red",
-        fontWeight: "800",        
-        fontSize: 40,
-    },
-    white:{
-        color: "rgba(255,255,255,1)",
-    },
-    black:{
-        color: "rgba(0,0,0,1)",
-    },
-    textView:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-  });
+    shadowRadius: 5,
+    elevation: 6,
+  },
+  text: {
+    fontFamily: "Andika",
+    fontWeight: "400",
+    textDecorationLine: "none",
+    fontSize: 15,
+    letterSpacing: 0.1,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    color: "black",
+    fontWeight: "800",
+    fontSize: 20,
+
+  },
+  nutriscore_Bon: {
+    color: "green",
+    fontWeight: "800",
+    fontSize: 40,
+  },
+  nutriscore_Mauvais: {
+    color: "red",
+    fontWeight: "800",
+    fontSize: 40,
+  },
+  white: {
+    color: "rgba(255,255,255,1)",
+  },
+  black: {
+    color: "rgba(0,0,0,1)",
+  },
+  textView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+});
 
 const styles = {
   container: {
@@ -413,11 +413,11 @@ const styles = {
     elevation: 6,
   },
   text: {
-      fontFamily: "Andika",
-      fontWeight: "400",
-      textDecorationLine: "none",
-      fontSize: 15,
-      letterSpacing: 0.1,
+    fontFamily: "Andika",
+    fontWeight: "400",
+    textDecorationLine: "none",
+    fontSize: 15,
+    letterSpacing: 0.1,
   },
   container_: {
     flex: 1,
@@ -425,31 +425,31 @@ const styles = {
     alignItems: "center",
   },
   title: {
-      color: "black",
-      fontWeight: "800",        
-      fontSize: 20,
-      
+    color: "black",
+    fontWeight: "800",
+    fontSize: 20,
+
   },
   nutriscore_Bon: {
-      color: "green",
-      fontWeight: "800",        
-      fontSize: 40,
+    color: "green",
+    fontWeight: "800",
+    fontSize: 40,
   },
   nutriscore_Mauvais: {
-      color: "red",
-      fontWeight: "800",        
-      fontSize: 40,
+    color: "red",
+    fontWeight: "800",
+    fontSize: 40,
   },
-  white:{
-      color: "rgba(255,255,255,1)",
+  white: {
+    color: "rgba(255,255,255,1)",
   },
-  black:{
-      color: "rgba(0,0,0,1)",
+  black: {
+    color: "rgba(0,0,0,1)",
   },
-  textView:{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+  textView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 };
 
