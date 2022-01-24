@@ -6,6 +6,8 @@ import Permissions from 'react-native-permissions';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path } from "react-native-svg";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import axios from 'axios';
+
 
 const CameraApp = () => {
 
@@ -19,12 +21,15 @@ const CameraApp = () => {
     let [isOpen, setIsOpen] = useState(false)
     let cameraRef = useRef(null)
     let [barcodeArray, setBarcodeArray] = useState([])
+    let [Product, setProduct] = useState({});
+
     useEffect(() => {
         Permissions.check('photo').then(response => {
         // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
         setPermission(response);
         });
     }, []);
+    
 
     const toggleFlash = () => {
         setFlash(flashModeOrder[flash])
@@ -36,6 +41,31 @@ const CameraApp = () => {
         setZoom(zoom + 0.1 > 1 ? 1 : zoom + 0.1);
     }
 
+    const getDataOfProduct = (scanResult) => {
+      axios.get(`https://world.openfoodfacts.org/api/v0/product/${scanResult}.json`)
+      .then(res => {    
+        let ProductInfo = res.data;
+        setProduct(ProductInfo);
+        setState({
+          tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de 100g'],
+          tableData: [
+            ['Énergie', `${ProductInfo.product.nutriments.energy_100g}`],
+            ['Matière grasses', `${ProductInfo.product.nutriments.fat_100g}`],
+            ['Acides gras saturés', `${ProductInfo.product.nutriments["saturated-fat_100g"]}`],
+            ['Glucide dont sucre', `${Math.round(ProductInfo.product.nutriments.carbohydrates_100g * 10) / 10}`],
+            ['Fibres', `${ProductInfo.product.nutriments.fiber_100g}`],
+            ['Protéines', `${Math.round(ProductInfo.product.nutriments.proteins_100g * 10) / 10}`],
+            ['Sel', `${Math.round(ProductInfo.product.nutriments.salt_100g * 10) / 10}`]
+          ]
+        })
+        setIsOpen(true)
+        sheetRef.current.snapTo(1);setModalState(false);
+      }).catch(e => {
+          console.log(`Register error ${e}`)
+        
+      });
+    }
+
     const onBarCodeRead = (scanResult) => {
       console.log(barcodeArray);
       if(barcodeArray.length > 0 && isOpen) {
@@ -45,33 +75,33 @@ const CameraApp = () => {
       if (scanResult.data != null && !isOpen) {
         if (!barcodeArray.includes(scanResult.data)) {
           barcodeArray.push(scanResult.data);
-          console.warn('onBarCodeRead call');
+          getDataOfProduct(scanResult.data);
+          console.log('onBarCodeRead call');
         }
         else {
           return;
         }
-        setIsOpen(true)
-        sheetRef.current.snapTo(1);setModalState(false);
       }
       return;
     }
+
 
     const [ModalState, setModalState] = useState(false);
         
     const sheetRef = React.useRef(null);
 
-    const state = {
+    const [state, setState] = useState({
         tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de ?g'],
         tableData: [
           ['Énergie', '80 Kcal'],
           ['Matière grasses', '4.1g'],
           ['Acides gras saturés', '0.5g'],
-          ['Glucide dont sucre', '8.6g'],
+          ['Glucide dont sucre', '0.6g'],
           ['Fibres', ''],
           ['Protéines', '0.9g'],
           ['Sel', '0.016g']
         ]
-      }
+      })
 
     const renderContent = () => (
         <View
@@ -88,12 +118,12 @@ const CameraApp = () => {
                 <View style={{justifyContent:'space-between',flexDirection:'column'}}>
                 <View style={{ flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginBottom:'-20%'}}> 
-                <Image source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
+                <Image source={{uri: `${Product.product.image_front_small_url}`}} style={{width: '100%', height: '300%'}} resizeMode="stretch"></Image>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{ alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>Title</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>UnderTitle</Text>
+                    <Text style={styles_Slider.title}>{Product.product.name_fr}</Text>
+                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.product_name_fr}</Text>
                 </View>
                 </View>
                 <View style={{padding: '5%', backgroundColor:'rgba(188, 177, 154, 0.5)',borderRadius: 30, borderWidth: 0}}>
@@ -106,7 +136,6 @@ const CameraApp = () => {
                 {/* Information nutriscore */}
                 <View style={{alignSelf:'center'}}>
                     <Text style={styles_Slider.nutriscore_Mauvais}>
-                        MAUVAIS
                     </Text>
                 </View>
                 {/* Bouton Ajouter produit à sa consommation */}
@@ -135,12 +164,12 @@ const CameraApp = () => {
                 {/* View Image + Text */}
                 <View style={{felx:1, flexDirection:'row', justifyContent:'space-evenly'}}>
                 <View style={{width:'15%',height:'15%', marginLeft:'5%'}}> 
-                <ImageBackground source={require('../assets/Exemple_Image_Scan.jpg')} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
+                <ImageBackground source={{uri: `${Product.product.image_front_small_url}`}} style={{width: '100%', height: '170%'}} resizeMode="stretch"></ImageBackground>
                 </View>
                 {/* View Titre + sous-titre */}
                 <View style={{felx:1, alignItems:'center'}}>
-                    <Text style={styles_Slider.title}>Title</Text>
-                    <Text style={styles_Slider.text,styles_Slider.black}>UnderTitle</Text>
+                    <Text style={styles_Slider.title}>{Product.product.name_fr}</Text>
+                    <Text style={styles_Slider.text,styles_Slider.black}>{Product.product.product_name_fr}</Text>
                 </View>
                 </View>
                 </>
