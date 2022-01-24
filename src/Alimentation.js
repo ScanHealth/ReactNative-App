@@ -6,6 +6,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import { today } from 'moment';
 import moment from 'moment/min/moment-with-locales'
 import { Center } from 'native-base';
+import {LineChart,} from 'react-native-chart-kit'
 
 
 
@@ -162,13 +163,67 @@ const Alimentation = () => {
         </View>
     );
 
+    const [GraphState, setGraphState] = useState(true);
+
+    const GraphDay = {
+        labels: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
+        datasets: [
+          {
+            data: [20, 45, 28, 80, 99, 43, 20],
+            strokeWidth: 2, // optional
+          },
+        ],
+      };
+
+      const GraphMonth = {
+        labels: ['Ja','Fé','Ma','Av','Ma','Ju','Ju','Ao','Se','Oc','No','De'],
+        datasets: [
+            {
+              data: [456, 758, 788, 745, 632, 286, 756, 254, 658, 754, 654, 938],
+              strokeWidth: 2, // optional
+            },
+          ],
+      };
+
     // Code graph area
     const GraphArea = () => (
-        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30 }}>
+        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30, justifyContent:'space-between', alignItems:'center' }}>
             <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { GraphRef.current.snapTo(2); }} />
-            <GraphLogo style={{ width: 150, height: 150, alignSelf: 'center' }} />
             {/* View graph information */}
-            
+            <LineChart
+                data={GraphState ? (GraphDay) : (GraphMonth)}
+                width={320}
+                height={350}
+                yAxisLabel={'kcal '}
+                chartConfig={{
+                    backgroundColor: '#00561b',
+                    backgroundGradientFrom: '#38713e',
+                    backgroundGradientTo: '#5f8c61',
+                    decimalPlaces: 0, // optional, defaults to 2dp
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    style: {
+                        borderRadius: 16
+                    }
+                }}
+                bezier
+                style={{
+                    borderRadius: 16,
+                }}
+            />
+            <Pressable onPress={() => {setGraphState(GraphState ? (false) : (true))}}
+                style={({ pressed }) => [
+                    {
+                        width: 100,
+                        height: 28,
+                        borderRadius: 100,
+                        backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                    },]}>
+                <View style={styles.textView}>
+                    <Text style={styles.text, styles.white}>
+                        {GraphState ? ('Mois') : ('Jour')}
+                    </Text>
+                </View>
+            </Pressable>
         </View>
     );
 
