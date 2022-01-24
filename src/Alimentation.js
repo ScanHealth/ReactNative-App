@@ -5,6 +5,7 @@ import Svg, { Path, Use, Defs, Image as SvgImage } from "react-native-svg";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { today } from 'moment';
 import moment from 'moment/min/moment-with-locales'
+import { Center } from 'native-base';
 
 
 
@@ -21,6 +22,8 @@ const Alimentation = () => {
     const [DimancheState, setDimancheState] = useState(false);
 
     const sheetRef = React.useRef(null);
+    const DetailRef = React.useRef(null);
+    const GraphRef = React.useRef(null);
 
     // Variable date
     const Day = () => {
@@ -41,6 +44,20 @@ const Alimentation = () => {
         }
     }
 
+    // Modal detail info detail personnel
+    // Emplacement information tableau nutritif
+    const DetailPerso = {
+        tableHead: ['Valeurs nutritionelles pour', 'Total'],
+        tableData: [
+            ['Énergie', '800 Kcal'],
+            ['Matière grasses', '40.1g'],
+            ['Acides gras saturés', '10.5g'],
+            ['Glucide dont sucre', '8.6g'],
+            ['Fibres', '20g'],
+            ['Protéines', '30.9g'],
+            ['Sel', '10.016g']
+         ],
+    }
 
     // Emplacement information tableau nutritif
     const state = {
@@ -65,66 +82,94 @@ const Alimentation = () => {
     }
 
     const ConsumeList = [
-        // {
-        //     id: '1',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
-        // {
-        //     id: '2',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Chips',
-        // },
-        // {
-        //     id: '3',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
-        // {
-        //     id: '4',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
-        // {
-        //     id: '5',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Chips',
-        // },
-        // {
-        //     id: '6',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
-        // {
-        //     id: '7',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
-        // {
-        //     id: '8',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Chips',
-        // },
-        // {
-        //     id: '9',
-        //     image: require('../assets/Exemple_Image_Scan.jpg'),
-        //     title: 'Nutella',
-        // },
+        {
+            id: '1',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '2',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Chips',
+        },
+        {
+            id: '3',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '4',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '5',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Chips',
+        },
+        {
+            id: '6',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '7',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
+        {
+            id: '8',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Chips',
+        },
+        {
+            id: '9',
+            image: require('../assets/Exemple_Image_Scan.jpg'),
+            title: 'Nutella',
+        },
     ];
 
     const Item = ({ title, image }) => (
-        <View style={{ flexDirection: 'row', alignItems: 'center', margin: '10%' }}>
-            <View /*style={{}}*/>
-                <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
+        <Pressable onPress={()=>{sheetRef.current.snapTo(0),setModalState(true); }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', margin: '10%' }}>
+                <View /*style={{}}*/>
+                    <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
+                </View>
+                <View /*style={{}}*/>
+                    <Text style={styles.text, styles.black}>{title}</Text>
+                </View>
             </View>
-            <View /*style={{}}*/>
-                <Text style={styles.text, styles.black}>{title}</Text>
-            </View>
-        </View>
+        </Pressable>
     );
 
     const renderItem = ({ item }) => (
         <Item title={item.title} image={item.image} />
+    );
+
+    // Code detail area
+    const DetailArea = () => (
+        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30 }}>
+            <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { DetailRef.current.snapTo(2); }} />
+            <DetailLogo style={{ width: 150, height: 150, alignSelf: 'center' }} />
+            {/* View tableau information */}
+            <View style={{ padding: '5%', backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 0 }}>
+                {/* View tableau information */}
+                <Table borderStyle={{ borderWidth: 0, borderColor: '#c8e1ff' }}>
+                    <Row data={DetailPerso.tableHead} style={styles.head} textStyle={styles.text, styles.black} />
+                    <Rows data={DetailPerso.tableData} textStyle={styles.text, styles.black} />
+                </Table>
+            </View>
+        </View>
+    );
+
+    // Code graph area
+    const GraphArea = () => (
+        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30 }}>
+            <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { GraphRef.current.snapTo(2); }} />
+            <GraphLogo style={{ width: 150, height: 150, alignSelf: 'center' }} />
+            {/* View graph information */}
+            
+        </View>
     );
 
 
@@ -309,13 +354,17 @@ const Alimentation = () => {
                     </View>
                     {/* Button group */}
                     <View style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
-                        {/* Button graph */}
+                        {/* Button Detail */}
                         <View style={{ backgroundColor: '#D9EAC7', width: 100, height: 100, borderRadius: 30 }}>
+                            <Pressable onPress={()=>{DetailRef.current.snapTo(0)}}>
                             <DetailLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
+                            </Pressable>
                         </View>
-                        {/* Button detail */}
+                        {/* Button Graph */}
                         <View style={{ backgroundColor: '#A09783', width: 100, height: 100, borderRadius: 30 }}>
+                            <Pressable onPress={()=>{GraphRef.current.snapTo(0)}}>
                             <GraphLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
+                            </Pressable>
                         </View>
                     </View>
 
@@ -330,7 +379,7 @@ const Alimentation = () => {
                     },]}>
                     <View style={styles.textView}>
                         <Text style={styles.text, styles.white}>
-                            Voir détail du produit
+                            Ajouter des produits à ma consomation
                         </Text>
                     </View>
                 </Pressable>
@@ -340,6 +389,20 @@ const Alimentation = () => {
                 snapPoints={['70%', '15%', 0]}
                 borderRadius={10}
                 renderContent={BottomSheetModal}
+                initialSnap={2}
+            />
+            <BottomSheet
+                ref={DetailRef}
+                snapPoints={['70%', '15%', 0]}
+                borderRadius={10}
+                renderContent={DetailArea}
+                initialSnap={2}
+            />
+            <BottomSheet
+                ref={GraphRef}
+                snapPoints={['70%', '15%', 0]}
+                borderRadius={10}
+                renderContent={GraphArea}
                 initialSnap={2}
             />
         </>
