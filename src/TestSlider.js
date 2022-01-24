@@ -26,14 +26,8 @@ const TestSlider = () => {
         ]
       }
 
-    const renderContent = () => (
-        <View
-            style={{
-                backgroundColor: 'white',
-                padding: '1%',
-                height: '100%',
-            }}
-        >
+    const BottomSheetModal = () => (
+        <View style={{backgroundColor: 'white',padding: '1%',height: '100%',}}>
             {ModalState ? (
                 <>
                 {/* Modal haut affichage down + image + titre + details */}
@@ -121,7 +115,7 @@ const TestSlider = () => {
             ref={sheetRef}
             snapPoints={['70%', '15%', 0]}
             borderRadius={10}
-            renderContent={renderContent}
+            renderContent={BottomSheetModal}
             initialSnap={2}
           />
         </>
