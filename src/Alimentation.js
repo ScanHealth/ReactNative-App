@@ -6,8 +6,8 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import { today } from 'moment';
 import moment from 'moment/min/moment-with-locales'
 import { Center } from 'native-base';
-import {LineChart,} from 'react-native-chart-kit'
-import {  Divider } from 'react-native-elements';
+import { LineChart, } from 'react-native-chart-kit'
+import { Divider } from 'react-native-elements';
 
 
 
@@ -58,7 +58,7 @@ const Alimentation = () => {
             ['Fibres', '20g'],
             ['Protéines', '30.9g'],
             ['Sel', '10.016g']
-         ],
+        ],
     }
 
     // Emplacement information tableau nutritif
@@ -81,20 +81,20 @@ const Alimentation = () => {
         MaxAlimDay: 2300,
         MinAlimDay: 2100,
         MaxAlimWeek: 15400,
-        MinGlucide:80,
-        MoyGlucide:90,
-        MaxGlucide:110,
-        MinLipide:30,
-        MoyLipide:60,
-        MaxLipide:55,
-        MinProteine:10,
-        MoyProteine:5,
-        MaxProteine:30,
-        MinFibre:10,
-        MoyFibre:15,
-        MaxFibre:30,
-        MaxSel:5,
-        MoySel:0.2,
+        MinGlucide: 80,
+        MoyGlucide: 90,
+        MaxGlucide: 110,
+        MinLipide: 30,
+        MoyLipide: 60,
+        MaxLipide: 55,
+        MinProteine: 10,
+        MoyProteine: 5,
+        MaxProteine: 30,
+        MinFibre: 10,
+        MoyFibre: 15,
+        MaxFibre: 30,
+        MaxSel: 5,
+        MoySel: 0.2,
     }
 
     const ConsumeList = [
@@ -146,16 +146,16 @@ const Alimentation = () => {
     ];
 
     const Item = ({ title, image }) => (
-        <Pressable onPress={()=>{sheetRef.current.snapTo(0),setModalState(true); }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center',marginVertical:'2%',marginTop:'5%',width:150 }}>
+        <Pressable onPress={() => { sheetRef.current.snapTo(0), setModalState(true); }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: '2%', marginTop: '5%', width: 150 }}>
                 <View /*style={{}}*/>
                     <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
                 </View>
-                <View style={{maxWidth:100}}>
+                <View style={{ maxWidth: 100 }}>
                     <Text style={styles.text, styles.black}>{title}</Text>
                 </View>
             </View>
-            <Divider/>
+            <Divider />
         </Pressable>
     );
 
@@ -172,62 +172,62 @@ const Alimentation = () => {
                 <Text style={{ color: 'white', fontSize: 20 }}>{moment.locale('fr'), moment().format("dddd D MMMM")}</Text>
             </View>
             {/* Champs detail */}
-            <View style={{justifyContent:'space-between',width:'100%',height:'80%'}}>
-            {/* Glucide */}
-            <View>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                    <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Glucides</Text>
+            <View style={{ justifyContent: 'space-between', width: '100%', height: '80%' }}>
+                {/* Glucide */}
+                <View>
+                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                        <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Glucides</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinGlucide}{" Kcal <"} </Text>
+                        <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyGlucide > Alimentation.MaxGlucide || Alimentation.MoyGlucide < Alimentation.MinGlucide ? 'red' : 'green' }}>{Alimentation.MoyGlucide}</Text>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxGlucide}{" Kcal"}</Text>
+                    </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinGlucide}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyGlucide > Alimentation.MaxGlucide || Alimentation.MoyGlucide < Alimentation.MinGlucide ? 'red' : 'green' }}>{Alimentation.MoyGlucide}</Text>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxGlucide}{" Kcal"}</Text>
+                {/* Lipide */}
+                <View>
+                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                        <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Lipide</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinLipide}{" Kcal <"} </Text>
+                        <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyLipide > Alimentation.MaxLipide || Alimentation.MoyLipide < Alimentation.MinLipide ? 'red' : 'green' }}>{Alimentation.MoyLipide}</Text>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxLipide}{" Kcal"}</Text>
+                    </View>
                 </View>
-            </View>
-            {/* Lipide */}
-            <View>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                    <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Lipide</Text>
+                {/* Protéïnes */}
+                <View>
+                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                        <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Protéïnes</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinProteine}{" Kcal <"} </Text>
+                        <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyProteine > Alimentation.MaxProteine || Alimentation.MoyProteine < Alimentation.MinProteine ? 'red' : 'green' }}>{Alimentation.MoyProteine}</Text>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxProteine}{" Kcal"}</Text>
+                    </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinLipide}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyLipide > Alimentation.MaxLipide || Alimentation.MoyLipide < Alimentation.MinLipide ? 'red' : 'green' }}>{Alimentation.MoyLipide}</Text>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxLipide}{" Kcal"}</Text>
+                {/* Fibres */}
+                <View>
+                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                        <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Fibres</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinFibre}{" Kcal <"} </Text>
+                        <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyFibre > Alimentation.MaxFibre || Alimentation.MoyFibre < Alimentation.MinFibre ? 'red' : 'green' }}>{Alimentation.MoyFibre}</Text>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxFibre}{" Kcal"}</Text>
+                    </View>
                 </View>
-            </View>
-            {/* Protéïnes */}
-            <View>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                    <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Protéïnes</Text>
+                {/* Sel */}
+                <View>
+                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                        <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Sel</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                        <Text style={{ color: 'white', fontSize: 15, }}>{Alimentation.MaxSel}{" Kcal <"} </Text>
+                        <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoySel > Alimentation.MaxSel ? 'red' : 'green' }}>{Alimentation.MoySel}</Text>
+                        <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxSel}{" Kcal"}</Text>
+                    </View>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinProteine}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyProteine > Alimentation.MaxProteine || Alimentation.MoyProteine < Alimentation.MinProteine ? 'red' : 'green' }}>{Alimentation.MoyProteine}</Text>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxProteine}{" Kcal"}</Text>
-                </View>
-            </View>
-            {/* Fibres */}
-            <View>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                    <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Fibres</Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinFibre}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyFibre > Alimentation.MaxFibre || Alimentation.MoyFibre < Alimentation.MinFibre ? 'red' : 'green' }}>{Alimentation.MoyFibre}</Text>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxFibre}{" Kcal"}</Text>
-                </View>
-            </View>
-            {/* Sel */}
-            <View>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                    <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Sel</Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 15, }}>{Alimentation.MaxSel}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoySel > Alimentation.MaxSel ? 'red' : 'green' }}>{Alimentation.MoySel}</Text>
-                    <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxSel}{" Kcal"}</Text>
-                </View>
-            </View>
             </View>
         </View>
     );
@@ -237,28 +237,32 @@ const Alimentation = () => {
     const GraphDay = {
         labels: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
         datasets: [
-          {
-            data: [20, 45, 28, 80, 99, 43, 20],
-            strokeWidth: 2, // optional
-          },
+            {
+                data: [20, 45, 28, 80, 99, 43, 20],
+                strokeWidth: 2, // optional
+            },
         ],
-      };
+    };
 
-      const GraphMonth = {
-        labels: ['Ja','Fé','Ma','Av','Ma','Ju','Ju','Ao','Se','Oc','No','De'],
+    const GraphMonth = {
+        labels: ['Ja', 'Fé', 'Ma', 'Av', 'Ma', 'Ju', 'Ju', 'Ao', 'Se', 'Oc', 'No', 'De'],
         datasets: [
             {
-              data: [456, 758, 788, 745, 632, 286, 756, 254, 658, 754, 654, 938],
-              strokeWidth: 2, // optional
+                data: [456, 758, 788, 745, 632, 286, 756, 254, 658, 754, 654, 938],
+                strokeWidth: 2, // optional
             },
-          ],
-      };
+        ],
+    };
 
     // Code graph area
     const GraphArea = () => (
-        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30, justifyContent:'space-between', alignItems:'center' }}>
-            <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { GraphRef.current.snapTo(2); }} />
+        <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30, justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center', backgroundColor: '#D9EAC7', width: '100%', height: 70, alignSelf: 'center', borderTopStartRadius: 30, borderTopRightRadius: 30 }}>
+                <ChevronDown style={{ width: '50%', height: '50%', alignSelf: 'center' }} onPress={() => { GraphRef.current.snapTo(2); }} />
+                <Text style={{ color: 'white', fontSize: 20 }}>{'Graphique '}{GraphState ? ("de la semaine") : ("de l'année")}</Text>
+            </View>
             {/* View graph information */}
+            <View>
             <LineChart
                 data={GraphState ? (GraphDay) : (GraphMonth)}
                 width={320}
@@ -279,7 +283,9 @@ const Alimentation = () => {
                     borderRadius: 16,
                 }}
             />
-            <Pressable onPress={() => {setGraphState(GraphState ? (false) : (true))}}
+            </View>
+            <View>
+            <Pressable onPress={() => { setGraphState(GraphState ? (false) : (true)) }}
                 style={({ pressed }) => [
                     {
                         width: 100,
@@ -293,6 +299,7 @@ const Alimentation = () => {
                     </Text>
                 </View>
             </Pressable>
+            </View>
         </View>
     );
 
@@ -464,9 +471,9 @@ const Alimentation = () => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
                     {/* FlatList Consomation */}
                     <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-between', height: 300, width: 180, borderRadius: 5, marginRight: '10%' }}>
-                    <View style={{backgroundColor:'#BCB19A',width:'100%',borderTopStartRadius:5,borderTopRightRadius:5}}>
-                        <Text style={{color:'white', alignSelf:'center'}}>Liste de consomation</Text>
-                    </View>
+                        <View style={{ backgroundColor: '#BCB19A', width: '100%', borderTopStartRadius: 5, borderTopRightRadius: 5 }}>
+                            <Text style={{ color: 'white', alignSelf: 'center' }}>Liste de consomation</Text>
+                        </View>
                         <FlatList
                             data={ConsumeList}
                             renderItem={renderItem}
@@ -483,14 +490,14 @@ const Alimentation = () => {
                     <View style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
                         {/* Button Detail */}
                         <View style={{ backgroundColor: '#D9EAC7', width: 100, height: 100, borderRadius: 30 }}>
-                            <Pressable onPress={()=>{DetailRef.current.snapTo(0)}}>
-                            <DetailLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
+                            <Pressable onPress={() => { DetailRef.current.snapTo(0) }}>
+                                <DetailLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
                             </Pressable>
                         </View>
                         {/* Button Graph */}
                         <View style={{ backgroundColor: '#A09783', width: 100, height: 100, borderRadius: 30 }}>
-                            <Pressable onPress={()=>{GraphRef.current.snapTo(0)}}>
-                            <GraphLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
+                            <Pressable onPress={() => { GraphRef.current.snapTo(0) }}>
+                                <GraphLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
                             </Pressable>
                         </View>
                     </View>
