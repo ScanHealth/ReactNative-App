@@ -7,6 +7,7 @@ import { today } from 'moment';
 import moment from 'moment/min/moment-with-locales'
 import { Center } from 'native-base';
 import {LineChart,} from 'react-native-chart-kit'
+import {  Divider } from 'react-native-elements';
 
 
 
@@ -146,14 +147,15 @@ const Alimentation = () => {
 
     const Item = ({ title, image }) => (
         <Pressable onPress={()=>{sheetRef.current.snapTo(0),setModalState(true); }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', margin: '10%' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: '10%',marginVertical:'2%' }}>
                 <View /*style={{}}*/>
                     <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
                 </View>
-                <View /*style={{}}*/>
+                <View style={{maxWidth:100}}>
                     <Text style={styles.text, styles.black}>{title}</Text>
                 </View>
             </View>
+            <Divider/>
         </Pressable>
     );
 
@@ -169,6 +171,8 @@ const Alimentation = () => {
                 <ChevronDown style={{ width: '50%', height: '50%', alignSelf: 'center' }} onPress={() => { DetailRef.current.snapTo(2); }} />
                 <Text style={{ color: 'white', fontSize: 20 }}>{moment.locale('fr'), moment().format("dddd D MMMM")}</Text>
             </View>
+            {/* Champs detail */}
+            <View style={{justifyContent:'space-between',width:'100%',height:'80%'}}>
             {/* Glucide */}
             <View>
                 <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
@@ -176,7 +180,7 @@ const Alimentation = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinGlucide}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 35, color: Alimentation.MoyGlucide > Alimentation.MaxGlucide || Alimentation.MoyGlucide < Alimentation.MinGlucide ? 'red' : 'green' }}>{Alimentation.MoyGlucide}</Text>
+                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyGlucide > Alimentation.MaxGlucide || Alimentation.MoyGlucide < Alimentation.MinGlucide ? 'red' : 'green' }}>{Alimentation.MoyGlucide}</Text>
                     <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxGlucide}{" Kcal"}</Text>
                 </View>
             </View>
@@ -187,7 +191,7 @@ const Alimentation = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinLipide}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 35, color: Alimentation.MoyLipide > Alimentation.MaxLipide || Alimentation.MoyLipide < Alimentation.MinLipide ? 'red' : 'green' }}>{Alimentation.MoyLipide}</Text>
+                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyLipide > Alimentation.MaxLipide || Alimentation.MoyLipide < Alimentation.MinLipide ? 'red' : 'green' }}>{Alimentation.MoyLipide}</Text>
                     <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxLipide}{" Kcal"}</Text>
                 </View>
             </View>
@@ -198,7 +202,7 @@ const Alimentation = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinProteine}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 35, color: Alimentation.MoyProteine > Alimentation.MaxProteine || Alimentation.MoyProteine < Alimentation.MinProteine ? 'red' : 'green' }}>{Alimentation.MoyProteine}</Text>
+                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyProteine > Alimentation.MaxProteine || Alimentation.MoyProteine < Alimentation.MinProteine ? 'red' : 'green' }}>{Alimentation.MoyProteine}</Text>
                     <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxProteine}{" Kcal"}</Text>
                 </View>
             </View>
@@ -209,7 +213,7 @@ const Alimentation = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                     <Text style={{ color: 'black', fontSize: 15, }}>{Alimentation.MinFibre}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 35, color: Alimentation.MoyFibre > Alimentation.MaxFibre || Alimentation.MoyFibre < Alimentation.MinFibre ? 'red' : 'green' }}>{Alimentation.MoyFibre}</Text>
+                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoyFibre > Alimentation.MaxFibre || Alimentation.MoyFibre < Alimentation.MinFibre ? 'red' : 'green' }}>{Alimentation.MoyFibre}</Text>
                     <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxFibre}{" Kcal"}</Text>
                 </View>
             </View>
@@ -220,9 +224,10 @@ const Alimentation = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontSize: 15, }}>{Alimentation.MaxSel}{" Kcal <"} </Text>
-                    <Text style={{ color: 'black', fontSize: 35, color: Alimentation.MoySel > Alimentation.MaxSel ? 'red' : 'green' }}>{Alimentation.MoySel}</Text>
+                    <Text style={{ color: 'black', fontSize: 30, color: Alimentation.MoySel > Alimentation.MaxSel ? 'red' : 'green' }}>{Alimentation.MoySel}</Text>
                     <Text style={{ color: 'black', fontSize: 15, }}>{" < "}{Alimentation.MaxSel}{" Kcal"}</Text>
                 </View>
+            </View>
             </View>
         </View>
     );
