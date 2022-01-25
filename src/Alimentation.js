@@ -147,7 +147,7 @@ const Alimentation = () => {
 
     const Item = ({ title, image }) => (
         <Pressable onPress={()=>{sheetRef.current.snapTo(0),setModalState(true); }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: '10%',marginVertical:'2%' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center',marginVertical:'2%',marginTop:'5%',width:150 }}>
                 <View /*style={{}}*/>
                     <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
                 </View>
@@ -464,6 +464,9 @@ const Alimentation = () => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
                     {/* FlatList Consomation */}
                     <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-between', height: 300, width: 180, borderRadius: 5, marginRight: '10%' }}>
+                    <View style={{backgroundColor:'#BCB19A',width:'100%',borderTopStartRadius:5,borderTopRightRadius:5}}>
+                        <Text style={{color:'white', alignSelf:'center'}}>Liste de consomation</Text>
+                    </View>
                         <FlatList
                             data={ConsumeList}
                             renderItem={renderItem}
