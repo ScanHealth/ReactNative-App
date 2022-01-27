@@ -1,5 +1,5 @@
 import React, { Component, useState, useContext, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions,TextInput, Pressable, FlatList, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, Pressable, FlatList, Alert, ImageBackground, Image, SafeAreaView, TouchableOpacity, Button, TouchableHighlight, useColorScheme } from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Svg, { Path, Use, Defs, Image as SvgImage } from "react-native-svg";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -22,17 +22,26 @@ const Recherche = () => {
     const [RechercheArea, setRechercheAre] = React.useState(null);
 
     // Emplacement information tableau nutritif
-    const state = {
-        tableHead: ['Valeurs nutritionelles moyennes', 'Pour une portion de ?g'],
-        tableData: [
-            ['Énergie', '80 Kcal'],
-            ['Matière grasses', '4.1g'],
-            ['Acides gras saturés', '0.5g'],
-            ['Glucide dont sucre', '8.6g'],
-            ['Fibres', ''],
-            ['Protéines', '0.9g'],
-            ['Sel', '0.016g']
-        ]
+    const Alimentation = {
+        ResultatAlimDay: 500,
+        ResultatAlimWeek: 54000,
+        MaxAlimDay: 2300,
+        MinAlimDay: 2100,
+        MaxAlimWeek: 15400,
+        MinGlucide: 80,
+        MoyGlucide: 90,
+        MaxGlucide: 110,
+        MinLipide: 30,
+        MoyLipide: 60,
+        MaxLipide: 55,
+        MinProteine: 10,
+        MoyProteine: 5,
+        MaxProteine: 30,
+        MinFibre: 10,
+        MoyFibre: 15,
+        MaxFibre: 30,
+        MaxSel: 5,
+        MoySel: 0.2,
     }
 
     const Product = {
@@ -46,7 +55,7 @@ const Recherche = () => {
         Fibre: 0,
         Proteines: 0.9,
         Sel: 0.016,
-        NutriScore: 0,
+        NutriScore: 5,
     }
 
     const RechercheList = [
@@ -98,7 +107,7 @@ const Recherche = () => {
     ];
 
     const ScanList = [
-        
+
     ];
 
     const Item = ({ title, image }) => (
@@ -126,28 +135,96 @@ const Recherche = () => {
                 <>
                     {/* Modal haut affichage down + image + titre + details */}
                     <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2); setModalState(false); }} />
-                    <View style={{ justifyContent: 'space-between', flexDirection: 'column' }}>
+                    <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                            <View style={{ width: '15%', height: '15%', marginBottom: '-20%' }}>
-                                <Image source={require('../assets/Exemple_Image_Scan.jpg')} style={{ width: '100%', height: '300%' }} resizeMode="stretch"></Image>
+                            <View style={{ width: '15%', height: '15%' }}>
+                                <Image source={Product.Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
                             </View>
                             {/* View Titre + sous-titre */}
                             <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.title}>Title</Text>
-                                <Text style={styles.text, styles.black}>UnderTitle</Text>
+                                <Text style={styles.title}>{Product.Titre}</Text>
+                                <Text style={styles.text, styles.black}>{Product.SousTitre}</Text>
                             </View>
                         </View>
-                        <View style={{ padding: '5%', backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 0 }}>
+                        <View style={{ backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 3, borderColor: '#BCB19A' }}>
                             {/* View tableau information */}
-                            <Table borderStyle={{ borderWidth: 0, borderColor: '#c8e1ff' }}>
-                                <Row data={state.tableHead} style={styles.head} textStyle={styles.text, styles.black} />
-                                <Rows data={state.tableData} textStyle={styles.text, styles.black} />
-                            </Table>
+                            <View style={{ justifyContent: 'space-between', width: '100%', height: 'auto' }}>
+                                {/* Energie */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderTopStartRadius: 45, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" Kcal"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Matières Grasses */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Matières grasses</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.MatiereGrasse}{" g"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Acides gras saturés */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Acides gras saturés</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.AcidesGrasSature}{" g"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Glucide dont sucre */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucide dont sucre</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" g"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Fibres */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Fibres</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Fibre}{" g"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Protéines */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Protéines</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Proteines}{" g"}</Text>
+                                    </View>
+                                </View>
+                                <Divider style={styles.divider} />
+                                {/* Sel */}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderBottomLeftRadius: 45, justifyContent: 'center' }}>
+                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Sel</Text>
+                                    </View>
+                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Sel}{" g"}</Text>
+                                    </View>
+                                </View>
+                            </View>
                         </View>
+                        
                         {/* Information nutriscore */}
                         <View style={{ alignSelf: 'center' }}>
-                            <Text style={styles.nutriscore_Mauvais}>
-                                MAUVAIS
+                            <Text style={Product.NutriScore == 1 ? styles.nutriscore_A : Product.NutriScore == 2 ? styles.nutriscore_B : Product.NutriScore == 3 ? styles.nutriscore_C : Product.NutriScore == 4 ? styles.nutriscore_D : Product.NutriScore == 5 ? styles.nutriscore_E : { color: 'black' }}>
+                                {Product.NutriScore == 1 ? 'Très bon' : Product.NutriScore == 2 ? 'Bon' : Product.NutriScore == 3 ? 'Assez bon' : Product.NutriScore == 4 ? 'Moyen' : Product.NutriScore == 5 ? 'Mauvais' : 'Nutriscore inconnu'}
                             </Text>
                         </View>
                         {/* Bouton Ajouter produit à sa consommation */}
@@ -158,7 +235,7 @@ const Recherche = () => {
                                         width: 306,
                                         height: 58,
                                         borderRadius: 100,
-                                        backgroundColor: pressed ? 'rgba(88,199,10,1)' : 'rgba(88,166,60,1)',
+                                        backgroundColor: pressed ? '#598E12' : '#4C711C',
                                     },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>
@@ -174,14 +251,16 @@ const Recherche = () => {
                     {/* Modal bas affichage up + image + titre */}
                     <ChevronUp style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(0); setModalState(true); }} />
                     {/* View Image + Text */}
-                    <View style={{ felx: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                        <View style={{ width: '15%', height: '15%', marginLeft: '5%' }}>
-                            <ImageBackground source={require('../assets/Exemple_Image_Scan.jpg')} style={{ width: '100%', height: '170%' }} resizeMode="stretch"></ImageBackground>
-                        </View>
-                        {/* View Titre + sous-titre */}
-                        <View style={{ felx: 1, alignItems: 'center' }}>
-                            <Text style={styles.title}>Title</Text>
-                            <Text style={styles.text, styles.black}>UnderTitle</Text>
+                    <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                            <View style={{ width: '15%', height: '15%' }}>
+                                <Image source={Product.Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
+                            </View>
+                            {/* View Titre + sous-titre */}
+                            <View style={{ alignItems: 'center' }}>
+                                <Text style={styles.title}>{Product.Titre}</Text>
+                                <Text style={styles.text, styles.black}>{Product.SousTitre}</Text>
+                            </View>
                         </View>
                     </View>
                 </>
@@ -252,6 +331,7 @@ const Recherche = () => {
                 borderRadius={10}
                 renderContent={BottomSheetModal}
                 initialSnap={2}
+                
             />
         </>
     );
@@ -291,16 +371,6 @@ const styles_Slider = StyleSheet.create({
         fontWeight: "800",
         fontSize: 20,
 
-    },
-    nutriscore_Bon: {
-        color: "green",
-        fontWeight: "800",
-        fontSize: 40,
-    },
-    nutriscore_Mauvais: {
-        color: "red",
-        fontWeight: "800",
-        fontSize: 40,
     },
     white: {
         color: "rgba(255,255,255,1)",
@@ -349,13 +419,28 @@ const styles = StyleSheet.create({
         fontSize: 20,
 
     },
-    nutriscore_Bon: {
-        color: "green",
+    nutriscore_A: {
+        color: "#265A0C",
         fontWeight: "800",
         fontSize: 40,
     },
-    nutriscore_Mauvais: {
-        color: "red",
+    nutriscore_B: {
+        color: "#4DB31A",
+        fontWeight: "800",
+        fontSize: 40,
+    },
+    nutriscore_C: {
+        color: "#C6BF20",
+        fontWeight: "800",
+        fontSize: 40,
+    },
+    nutriscore_D: {
+        color: "#D88E24",
+        fontWeight: "800",
+        fontSize: 40,
+    },
+    nutriscore_E: {
+        color: "#C11414",
         fontWeight: "800",
         fontSize: 40,
     },
@@ -388,6 +473,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    divider: {
+        width: '50%',
+        height: 3,
+        borderRadius: 5,
+        backgroundColor: "#BCB19A",
+        alignSelf: 'flex-end'
     },
 });
 
