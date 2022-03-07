@@ -8,6 +8,7 @@ import Svg, { Path } from "react-native-svg";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { Divider } from 'react-native-elements';
 
 
 
@@ -25,9 +26,8 @@ const CameraApp = () => {
   let [barcodeArray, setBarcodeArray] = useState([])
   let [Product, setProduct] = useState({});
 
-//Erreur bizarre sur l'image à fix !
 
-  //let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
+  let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
   let [Title, setTitle] = useState('Undefined');
   let [SubTitle, setSubTitle] = useState('Undefined')
 
@@ -72,8 +72,7 @@ const CameraApp = () => {
           ]
         })
 
-//Toujours le même bug avec les images que je comprend pas
-        //setImage(`${ProductInfo.product.image_front_small_url}`);
+        setImage(`${ProductInfo.product.image_front_small_url}`);
         setTitle(`${ProductInfo.product.product_name_fr}`);
         setSubTitle(`${ProductInfo.product.brands}`);
 
@@ -128,11 +127,12 @@ const CameraApp = () => {
       {ModalState ? (
         <>
           {/* Modal haut affichage down + image + titre + details */}
-          <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2); setModalState(false); }} />
+          <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2), setModalState(false), setIsOpen(false), setBarcodeArray([])}} />
           <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <View style={{ width: '15%', height: '15%' }}>
-                <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
+              <ImageBackground source={{ uri: `${Image}` }} style={{ width: 100, height: 100 }} resizeMode="stretch"></ImageBackground>
+                {/* <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image> */}
               </View>
               {/* View Titre + sous-titre */}
               <View style={{ alignItems: 'center' }}>
@@ -149,7 +149,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{ProductInfo.product.nutriments.energy_100g}{" Kcal"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.product.nutriments.energy_100g}{" Kcal"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -159,7 +159,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Matières grasses</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{ProductInfo.product.nutriments.fat_100g}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.product.nutriments.fat_100g}{" g"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -169,7 +169,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Acides gras saturés</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{ProductInfo.product.nutriments["saturated-fat_100g"]}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.product.nutriments["saturated-fat_100g"]}{" g"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -179,7 +179,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucide dont sucre</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(ProductInfo.product.nutriments.carbohydrates_100g * 10) / 10}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(Product.product.nutriments.carbohydrates_100g * 10) / 10}{" g"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -189,7 +189,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Fibres</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{ProductInfo.product.nutriments.fiber_100g}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.product.nutriments.fiber_100g}{" g"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -199,7 +199,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Protéines</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(ProductInfo.product.nutriments.proteins_100g * 10) / 10}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(Product.product.nutriments.proteins_100g * 10) / 10}{" g"}</Text>
                   </View>
                 </View>
                 <Divider style={styles.divider} />
@@ -209,7 +209,7 @@ const CameraApp = () => {
                     <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Sel</Text>
                   </View>
                   <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(ProductInfo.product.nutriments.salt_100g * 10) / 10}{" g"}</Text>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(Product.product.nutriments.salt_100g * 10) / 10}{" g"}</Text>
                   </View>
                 </View>
               </View>
@@ -248,7 +248,8 @@ const CameraApp = () => {
           <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <View style={{ width: '15%', height: '15%' }}>
-                <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
+              <ImageBackground source={{ uri: `${Image}` }} style={{ width: 80, height: 80 }} resizeMode="stretch"></ImageBackground>
+                {/* <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image> */}
               </View>
               {/* View Titre + sous-titre */}
               <View style={{ alignItems: 'center' }}>
