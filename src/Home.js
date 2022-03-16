@@ -90,7 +90,7 @@ const Home = () => {
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
                 <LottieView
                 source={require('../assets/HomeAnim.json')}
-                autoPlay
+                
                 speed = {1.4}
                 loop = {true}
                 style={{width: '100%', height: '100%',alignSelf:'center'}}

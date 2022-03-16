@@ -19,20 +19,22 @@ const Navigation = () => {
     return (
         <NavigationContainer> 
             <Stack.Navigator screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarOptions: {
+                    showLabel: false
+                  }
             }}>
             {userInfo.token ? (
                 <>
                 <Stack.Screen name="Splash" component={Splash}/>
                 <Stack.Screen name="ScannerTab" component={ScannerTab}/>
-                </>
-             ) : (
-                 <>
-                <Stack.Screen name="Splash" component={Splash}/>
-                <Stack.Screen name="LoginRegister" component={LoginRegister} />
-                <Stack.Screen name="TestSlider" component={TestSlider}/>
                 <Stack.Screen name="Alimentation" component={Alimentation}/>
                 <Stack.Screen name="Recherche" component={Recherche}/>
+                </>
+             ) : (
+                <>
+                <Stack.Screen name="Splash" component={Splash}/>
+                <Stack.Screen name="LoginRegister" component={LoginRegister} />
                 </>
              )}
             </Stack.Navigator>

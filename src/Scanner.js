@@ -27,12 +27,12 @@ const CameraApp = () => {
   let [Product, setProduct] = useState({});
 
 
-  let [Image, setImage] = useState('https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/2048px-Solid_white_bordered.svg.png');
   let [Title, setTitle] = useState('Undefined');
-  let [SubTitle, setSubTitle] = useState('Undefined')
+  let [SubTitle, setSubTitle] = useState('Undefined');
+  let [imageUrl, setimageUrl] = useState('Undefined');
+
 
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     Permissions.check('photo').then(response => {
@@ -72,7 +72,11 @@ const CameraApp = () => {
           ]
         })
 
-        setImage(`${ProductInfo.product.image_front_small_url}`);
+
+
+        setimageUrl(`${ProductInfo.product.image_front_small_url}`);
+        console.log("image: " + imageUrl);
+
         setTitle(`${ProductInfo.product.product_name_fr}`);
         setSubTitle(`${ProductInfo.product.brands}`);
 
@@ -80,18 +84,21 @@ const CameraApp = () => {
         sheetRef.current.snapTo(1); setModalState(false);
 
         setIsLoading(false);
+
+        return;
       }).catch(e => {
         console.log(`Register error ${e}`)
 
       });
   }
 
+  useEffect(() => {
+    console.log("image: " + imageUrl);
+  }, [imageUrl])
+
+
   const onBarCodeRead = (scanResult) => {
     console.log(barcodeArray);
-    if (barcodeArray.length > 0 && isOpen) {
-      setBarcodeArray([])
-    }
-
     if (scanResult.data != null && !isOpen) {
       if (!barcodeArray.includes(scanResult.data)) {
         barcodeArray.push(scanResult.data);
@@ -127,15 +134,15 @@ const CameraApp = () => {
       {ModalState ? (
         <>
           {/* Modal haut affichage down + image + titre + details */}
-          <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2), setModalState(false), setIsOpen(false), setBarcodeArray([])}} />
+          <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { console.log(imageUrl); sheetRef.current.snapTo(2), setModalState(false), setIsOpen(false), setBarcodeArray([])}} />
           <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <View style={{ width: '15%', height: '15%' }}>
-              <ImageBackground source={{ uri: `${Image}` }} style={{ width: 100, height: 100 }} resizeMode="stretch"></ImageBackground>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+              <View>
+                <Image source={{uri: imageUrl}} style={{ width: 150, height: 100 }} resizeMode="contain"></Image>
                 {/* <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image> */}
               </View>
               {/* View Titre + sous-titre */}
-              <View style={{ alignItems: 'center' }}>
+              <View style={{ maxWidth: '50%'}}>
                 <Text style={styles.title}>{Title}</Text>
                 <Text style={styles.text, styles.black}>{SubTitle}</Text>
               </View>
@@ -217,8 +224,8 @@ const CameraApp = () => {
 
             {/* Information nutriscore */}
             <View style={{ alignSelf: 'center' }}>
-              <Text style={Product.NutriScore == 1 ? styles.nutriscore_A : Product.NutriScore == 2 ? styles.nutriscore_B : Product.NutriScore == 3 ? styles.nutriscore_C : Product.NutriScore == 4 ? styles.nutriscore_D : Product.NutriScore == 5 ? styles.nutriscore_E : { color: 'black' }}>
-                {Product.NutriScore == 1 ? 'Très bon' : Product.NutriScore == 2 ? 'Bon' : Product.NutriScore == 3 ? 'Assez bon' : Product.NutriScore == 4 ? 'Moyen' : Product.NutriScore == 5 ? 'Mauvais' : 'Nutriscore inconnu'}
+              <Text style={Product.product.nutriscore_data.grade == "a" ? styles_Slider.nutriscore_A : Product.product.nutriscore_data.grade == "b" ? styles_Slider.nutriscore_B : Product.product.nutriscore_data.grade == "c" ? styles_Slider.nutriscore_C : Product.product.nutriscore_data.grade == "d" ? styles_Slider.nutriscore_D : Product.product.nutriscore_data.grade == "e" ? styles_Slider.nutriscore_E : { color: 'black' }}>
+                {Product.product.nutriscore_data.grade == "a" ? 'Très bon' : Product.product.nutriscore_data.grade == "b" ? 'Bon' : Product.product.nutriscore_data.grade == "c" ? 'Assez bon' : Product.product.nutriscore_data.grade == "d" ? 'Moyen' : Product.product.nutriscore_data.grade == "e" ? 'Mauvais' : 'Nutriscore inconnu'}
               </Text>
             </View>
             {/* Bouton Ajouter produit à sa consommation */}
@@ -243,7 +250,7 @@ const CameraApp = () => {
       ) : (
         <>
           {/* Modal bas affichage up + image + titre */}
-          <ChevronUp style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(0); setModalState(true); }} />
+          <ChevronUp style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { console.log(imageUrl); sheetRef.current.snapTo(0); setModalState(true); }} />
           {/* View Image + Text */}
           <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
@@ -280,7 +287,7 @@ const CameraApp = () => {
           <View style={{ justifyContent: 'space-between', flexDirection: 'column' }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <View style={{ width: '15%', height: '15%', marginBottom: '-20%' }}>
-                <ImageBackground source={{ uri: `${Image}` }} style={{ width: 100, height: 100 }} resizeMode="stretch"></ImageBackground>
+                <Image source={{ uri: imageUrl }} style={{ width: 100, height: 100 }} resizeMode="stretch"></Image>
               </View>
               {/* View Titre + sous-titre */}
               <View style={{ alignItems: 'center' }}>
@@ -464,6 +471,7 @@ const styles_Slider = StyleSheet.create({
     textDecorationLine: "none",
     fontSize: 15,
     letterSpacing: 0.1,
+    
   },
   container: {
     flex: 1,
@@ -474,15 +482,31 @@ const styles_Slider = StyleSheet.create({
     color: "black",
     fontWeight: "800",
     fontSize: 20,
+    textAlign: 'right',
 
   },
-  nutriscore_Bon: {
-    color: "green",
+  nutriscore_A: {
+    color: "#0BAD17",
     fontWeight: "800",
     fontSize: 40,
   },
-  nutriscore_Mauvais: {
-    color: "red",
+  nutriscore_B: {
+    color: "#76E37E",
+    fontWeight: "800",
+    fontSize: 40,
+  },
+  nutriscore_C: {
+    color: "#FAED29",
+    fontWeight: "800",
+    fontSize: 40,
+  },
+  nutriscore_D: {
+    color: "#FAAE29",
+    fontWeight: "800",
+    fontSize: 40,
+  },
+  nutriscore_E: {
+    color: "#E53B3B",
     fontWeight: "800",
     fontSize: 40,
   },
@@ -572,9 +596,10 @@ const styles = {
     color: "black",
     fontWeight: "800",
     fontSize: 20,
+    textAlign: 'center',
 
   },
-  nutriscore_Bon: {
+  nutriscore_B: {
     color: "green",
     fontWeight: "800",
     fontSize: 40,
@@ -589,6 +614,8 @@ const styles = {
   },
   black: {
     color: "rgba(0,0,0,1)",
+    textAlign: 'center',
+
   },
   textView: {
     flex: 1,

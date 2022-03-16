@@ -5,23 +5,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Home';
 import {AuthContext} from './context/AuthContext';
 import TestSlider from './TestSlider';
-import Alimentation from './Alimentation'
-import Recherche from './Recherche'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const Tab = createBottomTabNavigator();
+
+const Stack = createNativeStackNavigator();
 
 export default function LoginRegister() {
       const {userInfo} = useContext(AuthContext)
 
-  return (
-      <Tab.Navigator screenOptions={{
-            headerShown: false
-        }}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Test" component={TestSlider} />
-        <Tab.Screen name="Nutrition" component={Alimentation}/>
-        <Tab.Screen name="Recherche" component={Recherche}/>
-      </Tab.Navigator>
-  );
+      return (
+        <Stack.Navigator screenOptions={{
+              headerShown: false
+          }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator>
+    );
 }
