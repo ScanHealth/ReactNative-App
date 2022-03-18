@@ -89,11 +89,11 @@ const Home = () => {
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
                 <LottieView
-                source={require('../assets/HomeAnim.json')}
-                
-                speed = {1.4}
-                loop = {true}
-                style={{width: '100%', height: '100%',alignSelf:'center'}}
+                    source={require('../assets/HomeAnim.json')}
+                    autoPlay
+                    speed = {1.4}
+                    loop = {true}
+                    style={{width: '100%', height: '100%',alignSelf:'center'}}
                 />                   
                 </ImageBackground>
                     <View style={homeStyleSheet._bouton_group,{position:'absolute',alignItems:'center',alignSelf:'center',marginTop:'100%'}}>    
@@ -231,7 +231,6 @@ const homeStyleSheet = StyleSheet.create({
         fontFamily: "Andika",
         fontWeight: "400",
         textDecorationLine: "none",
-        fontSize: 20,
         letterSpacing: 0.1,
     },
     _TextView: {
@@ -244,6 +243,7 @@ const homeStyleSheet = StyleSheet.create({
     },
     _black:{
         color: "rgba(0,0,0,1)",
+        fontSize: 20
     },
 });
 

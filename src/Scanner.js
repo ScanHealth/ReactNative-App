@@ -1,6 +1,6 @@
 
 import React, { Component, useContext, useState, useRef, useEffect, useLayoutEffect } from 'react';
-import { Button, Text, View, TouchableOpacity, StyleSheet, ImageBackground, Image, Pressable } from 'react-native';
+import { Button, Text, View, TouchableOpacity, StyleSheet, ImageBackground, Image, Pressable, TouchableHighlight } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { RNCamera } from 'react-native-camera';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -11,6 +11,9 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Divider } from 'react-native-elements';
+import {AuthContext} from './context/AuthContext';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 
 const CameraApp = (props) => {
@@ -39,6 +42,9 @@ const CameraApp = (props) => {
   const onFullScreen = () => {
     console.log("I'll fire on full screen");
   };
+
+  const {DebugLogout} = useContext(AuthContext);
+
 
 
 
@@ -151,16 +157,16 @@ const CameraApp = (props) => {
     <View style={{ backgroundColor: 'white', padding: '1%', height: '100%', }}>
       <>
         {/* Modal haut affichage down + image + titre + details */}
-        <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { console.log(imageUrl); sheetRef.current.snapTo(2), setModalState(false), setIsOpen(false), setBarcodeArray([]) }} />
+        <View style={{ marginTop: 10, marginBottom: 40, width: 100, height: 0, alignSelf: 'center', borderWidth: 1, borderColor: '#4e4e4e' }}/>
         <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+          <View style={{ marginBottom: 30, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
             <View>
               <Image source={{ uri: imageUrl }} style={{ width: 150, height: 100 }} resizeMode="contain"></Image>
               {/* <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image> */}
             </View>
             {/* View Titre + sous-titre */}
 
-            <View style={{ maxWidth: '50%' }}>
+            <View style={{ maxWidth: '55%' }}>
               <Text style={styles.title}>{Title}</Text>
               <Text style={styles.text, styles.black}>{SubTitle}</Text>
             </View>
@@ -333,7 +339,23 @@ const CameraApp = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
+              <Pressable onPress={DebugLogout} style={{
+              position: "absolute", left: 0, top: 0, zIndex : 1,
+              margin: 10,
+              borderWidth:1,
+              borderColor:'rgba(0,0,0,0.2)',
+              alignItems:'center',
+              justifyContent:'center',
+              width:60,
+              height:60,
+              backgroundColor:'#d2f2ec',
+              borderRadius:50,
+            }}>
+              <View>
+                <MaterialCommunityIcons style={{marginLeft: 3}}name="logout" color="#ff791d" size={30} />
+              </View>
+          </Pressable>
+      <View style={styles.container}> 
         <RNCamera
           ref={cameraRef}
           style={styles.preview}
@@ -341,7 +363,12 @@ const CameraApp = (props) => {
           captureAudio={false}
           flashMode={flash}
           onBarCodeRead={onBarCodeRead}
-        />
+          autoFocus={true}
+        >
+        <View>
+          <Image source={require("../assets/logo_scan.png")} style={{ width: 600, height: 600, flex: 1, opacity: 0.6}} resizeMode="contain"></Image>
+        </View>
+        </RNCamera>
         <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
 
         </View>
@@ -352,11 +379,12 @@ const CameraApp = (props) => {
       {isOpen ? (
         <>
           <Animated.Code>
+             {/* Detecte quand le modal est fermé par l'user" */}
             {() => Animated.onChange(callbackNode, [Animated.cond(Animated.eq(callbackNode, 1), Animated.call([], () => { setModalState(false), setIsOpen(false), setBarcodeArray([]) }),)])}
           </Animated.Code>
           <BottomSheet
             ref={sheetRef}
-            snapPoints={['70%', '15%', 0]}
+            snapPoints={['80%', '25%', 0]}
             borderRadius={10}
             renderContent={renderContent}
             initialSnap={2}
@@ -557,6 +585,15 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  btnClickContain: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
+    backgroundColor: '#009D6E',
+    width: 32,
+    height: 32,
+  },
 };
 
