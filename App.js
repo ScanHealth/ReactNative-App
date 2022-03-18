@@ -8,15 +8,15 @@
 
 import React from 'react';
 import { Button, Center, NativeBaseProvider } from "native-base";
-import {AuthProvider} from './src/context/AuthContext';
+import { AuthProvider } from './src/context/AuthContext';
 import Navigation from './src/components/Navigation';
-import {LogBox } from 'react-native';
+import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Reanimated 2']);
 
 export default function App() {
   return (
     <AuthProvider>
-        <Navigation/>
+      <Navigation />
     </AuthProvider>
   );
 }
