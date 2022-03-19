@@ -162,7 +162,7 @@ const CameraApp = (props) => {
           <View style={{ marginBottom: 30, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
             <View>
               <Image source={{ uri: imageUrl }} style={{ width: 150, height: 100 }} resizeMode="contain"></Image>
-              {/* <Image source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image> */}
+              {/* <Imag source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Imag> */}
             </View>
             {/* View Titre + sous-titre */}
 
