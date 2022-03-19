@@ -248,8 +248,8 @@ const CameraApp = (props) => {
 
           {/* Information nutriscore */}
           <View style={{ alignSelf: 'center' }}>
-            <Text style={Product.product.nutriscore_data.grade == "a" ? styles_Slider.nutriscore_A : Product.product.nutriscore_data.grade == "b" ? styles_Slider.nutriscore_B : Product.product.nutriscore_data.grade == "c" ? styles_Slider.nutriscore_C : Product.product.nutriscore_data.grade == "d" ? styles_Slider.nutriscore_D : Product.product.nutriscore_data.grade == "e" ? styles_Slider.nutriscore_E : { color: 'black' }}>
-              {Product.product.nutriscore_data.grade == "a" ? 'Très bon' : Product.product.nutriscore_data.grade == "b" ? 'Bon' : Product.product.nutriscore_data.grade == "c" ? 'Assez bon' : Product.product.nutriscore_data.grade == "d" ? 'Moyen' : Product.product.nutriscore_data.grade == "e" ? 'Mauvais' : 'Nutriscore inconnu'}
+            <Text style={Product.product.nutrition_grades_tags == "a" ? styles_Slider.nutriscore_A : Product.product.nutrition_grades_tags == "b" ? styles_Slider.nutriscore_B : Product.product.nutrition_grades_tags == "c" ? styles_Slider.nutriscore_C : Product.product.nutrition_grades_tags == "d" ? styles_Slider.nutriscore_D : Product.product.nutrition_grades_tags == "e" ? styles_Slider.nutriscore_E : { color: 'black' }}>
+              {Product.product.nutrition_grades_tags == "a" ? 'Très bon' : Product.product.nutrition_grades_tags == "b" ? 'Bon' : Product.product.nutrition_grades_tags == "c" ? 'Assez bon' : Product.product.nutrition_grades_tags == "d" ? 'Moyen' : Product.product.nutrition_grades_tags == "e" ? 'Mauvais' : 'Nutriscore inconnu'}
             </Text>
           </View>
           {/* Bouton Ajouter produit à sa consommation */}
