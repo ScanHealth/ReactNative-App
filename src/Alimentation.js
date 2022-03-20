@@ -538,6 +538,7 @@ const Alimentation = () => {
                 snapPoints={['60%', '23%', 0]}
                 borderRadius={10}
                 renderContent={BottomSheetModal}
+                initialSnap={2}
             />
             <BottomSheet
                 ref={DetailRef}
