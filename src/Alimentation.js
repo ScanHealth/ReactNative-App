@@ -132,7 +132,7 @@ const Alimentation = () => {
     ];
 
     const Item = ({ title, image }) => (
-        <Pressable onPress={() => { sheetRef.current.snapTo(0), setModalState(true); }}>
+        <Pressable onPress={() => { sheetRef.current.snapTo(1), setModalState(true); }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: '2%', marginTop: '5%', width: 150 }}>
                 <View /*style={{}}*/>
                     <Image source={image} style={{ width: 50, height: 50 }} resizeMode="contain"></Image>
@@ -153,7 +153,7 @@ const Alimentation = () => {
     const DetailArea = () => (
         <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', borderRadius: 30 }}>
             {/* Titre date + chevron */}
-            <View style={{ flexDirection: 'column', alignItems: 'center', backgroundColor: '#A09783', width: '100%', height: 70, alignSelf: 'center', borderTopStartRadius: 30, borderTopRightRadius: 30 }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center', backgroundColor: '#ffbbb4', width: '100%', height: 70, alignSelf: 'center', borderTopStartRadius: 30, borderTopRightRadius: 30 }}>
                 <ChevronDown style={{ width: '50%', height: '50%', alignSelf: 'center' }} onPress={() => { DetailRef.current.snapTo(2); }} />
                 <Text style={{ color: 'white', fontSize: 20 }}>{moment.locale('fr'), moment().format("dddd D MMMM")}</Text>
             </View>
@@ -161,7 +161,7 @@ const Alimentation = () => {
             <View style={{ justifyContent: 'space-between', width: '100%', height: '80%' }}>
                 {/* Glucide */}
                 <View>
-                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: '#f98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                         <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Glucides</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -172,7 +172,7 @@ const Alimentation = () => {
                 </View>
                 {/* Lipide */}
                 <View>
-                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: '#f98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                         <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Lipide</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -183,7 +183,7 @@ const Alimentation = () => {
                 </View>
                 {/* Protéïnes */}
                 <View>
-                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: '#f98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                         <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Protéïnes</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -194,7 +194,7 @@ const Alimentation = () => {
                 </View>
                 {/* Fibres */}
                 <View>
-                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: '#f98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                         <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Fibres</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -205,7 +205,7 @@ const Alimentation = () => {
                 </View>
                 {/* Sel */}
                 <View>
-                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: '#f98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                         <Text style={{ alignSelf: 'center', fontSize: 20, color: 'white' }}>Sel</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -243,9 +243,9 @@ const Alimentation = () => {
     // Code graph area
     const GraphArea = () => (
         <View style={{ width: '90%', height: '95%', alignSelf: 'center', backgroundColor: 'white', padding: '1%', borderRadius: 30, justifyContent: 'space-between', alignItems: 'center' }}>
-            <View style={{ flexDirection: 'column', alignItems: 'center', backgroundColor: '#D9EAC7', width: '100%', height: 70, alignSelf: 'center', borderTopStartRadius: 30, borderTopRightRadius: 30 }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center', backgroundColor: '#FFE76E', width: '100%', height: 70, alignSelf: 'center', borderTopStartRadius: 30, borderTopRightRadius: 30 }}>
                 <ChevronDown style={{ width: '50%', height: '50%', alignSelf: 'center' }} onPress={() => { GraphRef.current.snapTo(2); }} />
-                <Text style={{ color: 'white', fontSize: 20 }}>{'Graphique '}{GraphState ? ("de la semaine") : ("de l'année")}</Text>
+                <Text style={{ color: 'black', fontSize: 20 }}>{'Graphique '}{GraphState ? ("de la semaine") : ("de l'année")}</Text>
             </View>
             {/* View graph information */}
             <View>
@@ -255,11 +255,11 @@ const Alimentation = () => {
                     height={350}
                     yAxisLabel={'kcal '}
                     chartConfig={{
-                        backgroundColor: '#00561b',
-                        backgroundGradientFrom: '#38713e',
-                        backgroundGradientTo: '#5f8c61',
+                        backgroundColor: '#FFDAAF',
+                        backgroundGradientFrom: '#FFDAAF',
+                        backgroundGradientTo: '#FFDAAF',
                         decimalPlaces: 0, // optional, defaults to 2dp
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         style: {
                             borderRadius: 16
                         }
@@ -277,7 +277,7 @@ const Alimentation = () => {
                             width: 100,
                             height: 28,
                             borderRadius: 100,
-                            backgroundColor: pressed ? '#598E12' : '#4C711C',
+                            backgroundColor: pressed ? '#ffbbba' : '#F98e83',
                         },]}>
                     <View style={styles.textView}>
                         <Text style={styles.text, styles.white}>
@@ -292,148 +292,114 @@ const Alimentation = () => {
 
     //Code Bottom sheet
     const BottomSheetModal = () => (
-        <View style={{ backgroundColor: 'white', padding: '1%', height: '100%', }}>
-            {ModalState ? (
-                <>
-                    {/* Modal haut affichage down + image + titre + details */}
-                    <ChevronDown style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(2); setModalState(false); }} />
-                    <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                            <View style={{ width: '15%', height: '15%' }}>
-                                <Image source={Product.Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
-                            </View>
-                            {/* View Titre + sous-titre */}
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.title}>{Product.Titre}</Text>
-                                <Text style={styles.text, styles.black}>{Product.SousTitre}</Text>
-                            </View>
-                        </View>
-                        <View style={{ backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 3, borderColor: '#BCB19A' }}>
-                            {/* View tableau information */}
-                            <View style={{ justifyContent: 'space-between', width: '100%', height: 'auto' }}>
-                                {/* Energie */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderTopStartRadius: 45, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" Kcal"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Matières Grasses */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Matières grasses</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.MatiereGrasse}{" g"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Acides gras saturés */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Acides gras saturés</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.AcidesGrasSature}{" g"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Glucide dont sucre */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucide dont sucre</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" g"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Fibres */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Fibres</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Fibre}{" g"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Protéines */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Protéines</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Proteines}{" g"}</Text>
-                                    </View>
-                                </View>
-                                <Divider style={styles.divider} />
-                                {/* Sel */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderBottomLeftRadius: 45, justifyContent: 'center' }}>
-                                        <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Sel</Text>
-                                    </View>
-                                    <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
-                                        <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Sel}{" g"}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        {/* Information nutriscore */}
-                        <View style={{ alignSelf: 'center' }}>
-                            <Text style={Product.NutriScore == 1 ? styles.nutriscore_A : Product.NutriScore == 2 ? styles.nutriscore_B : Product.NutriScore == 3 ? styles.nutriscore_C : Product.NutriScore == 4 ? styles.nutriscore_D : Product.NutriScore == 5 ? styles.nutriscore_E : { color: 'black' }}>
-                                {Product.NutriScore == 1 ? 'Très bon' : Product.NutriScore == 2 ? 'Bon' : Product.NutriScore == 3 ? 'Assez bon' : Product.NutriScore == 4 ? 'Moyen' : Product.NutriScore == 5 ? 'Mauvais' : 'Nutriscore inconnu'}
-                            </Text>
-                        </View>
-                        {/* Bouton Ajouter produit à sa consommation */}
-                        <View style={{ alignSelf: 'center' }}>
-                            <Pressable onPress={() => { }}
-                                style={({ pressed }) => [
-                                    {
-                                        width: 306,
-                                        height: 58,
-                                        borderRadius: 100,
-                                        backgroundColor: pressed ? '#598E12' : '#4C711C',
-                                    },]}>
-                                <View style={styles.textView}>
-                                    <Text style={styles.text, styles.white}>
-                                        Ajouter à ma consommation
-                                    </Text>
-                                </View>
-                            </Pressable>
-                        </View>
-                    </View>
-                </>
-            ) : (
-                <>
-                    {/* Modal bas affichage up + image + titre */}
-                    <ChevronUp style={{ width: '10%', height: '10%', alignSelf: 'center' }} onPress={() => { sheetRef.current.snapTo(0); setModalState(true); }} />
-                    {/* View Image + Text */}
-                    <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                            <View style={{ width: '15%', height: '15%' }}>
-                                <Image source={Product.Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Image>
-                            </View>
-                            {/* View Titre + sous-titre */}
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.title}>{Product.Titre}</Text>
-                                <Text style={styles.text, styles.black}>{Product.SousTitre}</Text>
-                            </View>
-                        </View>
-                    </View>
-                </>
-            )}
-        </View>
+        <View style={{ backgroundColor: '#FFDAAF', padding: '1%', height: '100%', }}>
+        <>
+          {/* Modal haut affichage down + image + titre + details */}
+          <View style={{ marginTop: 10, marginBottom: 40, width: 100, height: 0, alignSelf: 'center', borderWidth: 0 }}/>
+          <View style={{ flexDirection: 'column', width: '100%', height: '90%' }}>
+            <View style={{ marginBottom: 30, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+              <View>
+                <Image source={Product.Image} style={{ width: 150, height: 100 }} resizeMode="contain"></Image>
+                {/* <Imag source={Image} style={{ width: 50, height: 50 }} resizeMode="stretch"></Imag> */}
+              </View>
+              {/* View Titre + sous-titre */}
+  
+              <View style={{ maxWidth: '55%' }}>
+                <Text style={styles.title}>Nutella</Text>
+                <Text style={styles.text, styles.black}>{Product.SousTitre}</Text>
+              </View>
+            </View>
+            <View style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 30, borderWidth: 0, borderColor: '#FFF', marginLeft: 20, marginRight: 20}}>
+              {/* View tableau information */}
+              <View style={{ justifyContent: 'space-between', width: '100%', height: 'auto' }}>
+                {/* Energie */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderTopStartRadius: 45, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Energie</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" Kcal"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Matières Grasses */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Matières grasses</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.MatiereGrasse}{" g"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Acides gras saturés */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Acides gras saturés</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.AcidesGrasSature}{" g"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Glucide dont sucre */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides dont sucres</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.GlucideDontSucre}{" g"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Fibres */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Fibres</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Fibre}{" g"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Protéines */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Protéines</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Proteines}{" g"}</Text>
+                  </View>
+                </View>
+                <Divider style={styles.divider} />
+                {/* Sel */}
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderBottomLeftRadius: 45, justifyContent: 'center' }}>
+                    <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Sel</Text>
+                  </View>
+                  <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
+                    <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.Sel}{" g"}   </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+  
+           
+            {/* Bouton Ajouter produit à sa consommation */}
+        
+          </View>
+        </>
+  
+      </View>
+
+  
     );
 
     // Code page alimentation
     return (
         <>
             {Day()}
-            <View style={{ flex: 1, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'flex-start', justifyContent: 'space-around' }}>
+            <View style={{ flex: 1, backgroundColor: '#D2F2EC', alignItems: 'center', justifyContent: 'flex-start', justifyContent: 'space-evenly' }}>
                 {/* Titre view */}
                 <View>
                     <Text style={{ fontSize: 40, color: 'black' }}>Nutrition</Text>
@@ -445,7 +411,7 @@ const Alimentation = () => {
                         {/* Lundi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(true), setMardiState(false), setMercrediState(false), setJeudiState(false), setVendrediState(false), setSamediState(false), setDimancheState(false) }}
-                                style={({ pressed }) => [LundiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [LundiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>L</Text>
                                 </View>
@@ -454,7 +420,7 @@ const Alimentation = () => {
                         {/* Mardi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(true), setMercrediState(false), setJeudiState(false), setVendrediState(false), setSamediState(false), setDimancheState(false) }}
-                                style={({ pressed }) => [MardiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [MardiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>M</Text>
                                 </View>
@@ -463,7 +429,7 @@ const Alimentation = () => {
                         {/* Mercredi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(false), setMercrediState(true), setJeudiState(false), setVendrediState(false), setSamediState(false), setDimancheState(false) }}
-                                style={({ pressed }) => [MercrediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [MercrediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>M</Text>
                                 </View>
@@ -472,7 +438,7 @@ const Alimentation = () => {
                         {/* Jeudi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(false), setMercrediState(false), setJeudiState(true), setVendrediState(false), setSamediState(false), setDimancheState(false) }}
-                                style={({ pressed }) => [JeudiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [JeudiState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>J</Text>
                                 </View>
@@ -481,7 +447,7 @@ const Alimentation = () => {
                         {/* Vendredi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(false), setMercrediState(false), setJeudiState(false), setVendrediState(true), setSamediState(false), setDimancheState(false) }}
-                                style={({ pressed }) => [VendrediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [VendrediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>V</Text>
                                 </View>
@@ -490,7 +456,7 @@ const Alimentation = () => {
                         {/* Samedi button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(false), setMercrediState(false), setJeudiState(false), setVendrediState(false), setSamediState(true), setDimancheState(false) }}
-                                style={({ pressed }) => [SamediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [SamediState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>S</Text>
                                 </View>
@@ -499,7 +465,7 @@ const Alimentation = () => {
                         {/* Dimanche button View */}
                         <View>
                             <Pressable onPress={() => { setLundiState(false), setMardiState(false), setMercrediState(false), setJeudiState(false), setVendrediState(false), setSamediState(false), setDimancheState(true) }}
-                                style={({ pressed }) => [DimancheState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#A09783' : '#BCB19A', },]}>
+                                style={({ pressed }) => [DimancheState ? (styles.dateSelect) : (styles.dateNotSelect), { backgroundColor: pressed ? '#4B9E92' : '#93D9CF', },]}>
                                 <View style={styles.textView}>
                                     <Text style={styles.text, styles.white}>D</Text>
                                 </View>
@@ -526,9 +492,7 @@ const Alimentation = () => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
                     {/* FlatList Consomation */}
                     <View style={{ backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-between', height: 300, width: 180, borderRadius: 5, marginRight: '10%' }}>
-                        <View style={{ backgroundColor: '#BCB19A', width: '100%', borderTopStartRadius: 5, borderTopRightRadius: 5 }}>
-                            <Text style={{ color: 'white', alignSelf: 'center' }}>Liste de consomation</Text>
-                        </View>
+
                         <FlatList
                             data={ConsumeList}
                             renderItem={renderItem}
@@ -544,13 +508,21 @@ const Alimentation = () => {
                     {/* Button group */}
                     <View style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
                         {/* Button Detail */}
-                        <View style={{ backgroundColor: '#D9EAC7', width: 100, height: 100, borderRadius: 30 }}>
+                        <View style={{ backgroundColor: '#FFBBB4', width: 100, height: 100, borderRadius: 30, shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,}}>
                             <Pressable onPress={() => { DetailRef.current.snapTo(0) }}>
                                 <DetailLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
                             </Pressable>
                         </View>
                         {/* Button Graph */}
-                        <View style={{ backgroundColor: '#A09783', width: 100, height: 100, borderRadius: 30 }}>
+                        <View style={{ backgroundColor: '#FFE76E', width: 100, height: 100, borderRadius: 30,  shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity:  0.4,
+        shadowRadius: 3,
+        elevation: 5,}}>
                             <Pressable onPress={() => { GraphRef.current.snapTo(0) }}>
                                 <GraphLogo style={{ width: '100%', height: '100%', alignSelf: 'center' }} />
                             </Pressable>
@@ -559,37 +531,24 @@ const Alimentation = () => {
 
                 </View>
 
-                <Pressable onPress={() => { sheetRef.current.snapTo(0); setModalState(true); }}
-                    style={({ pressed }) => [{
-                        width: 306,
-                        height: 58,
-                        borderRadius: 100,
-                        backgroundColor: pressed ? '#598E12' : '#4C711C',
-                    },]}>
-                    <View style={styles.textView}>
-                        <Text style={styles.text, styles.white}>
-                            Ajouter des produits à ma consomation
-                        </Text>
-                    </View>
-                </Pressable>
+                
             </View>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={['70%', '15%', 0]}
+                snapPoints={['60%', '23%', 0]}
                 borderRadius={10}
                 renderContent={BottomSheetModal}
-                initialSnap={2}
             />
             <BottomSheet
                 ref={DetailRef}
-                snapPoints={['70%', '15%', 0]}
+                snapPoints={['80%', '25%', 0]}
                 borderRadius={10}
                 renderContent={DetailArea}
                 initialSnap={2}
             />
             <BottomSheet
                 ref={GraphRef}
-                snapPoints={['70%', '15%', 0]}
+                snapPoints={['80%', '25%', 0]}
                 borderRadius={10}
                 renderContent={GraphArea}
                 initialSnap={2}

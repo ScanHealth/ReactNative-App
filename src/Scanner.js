@@ -154,10 +154,10 @@ const CameraApp = (props) => {
 
   const renderContent = () => (
 
-    <View style={{ backgroundColor: 'white', padding: '1%', height: '100%', }}>
+    <View style={{ backgroundColor: '#D2F2EC', padding: '1%', height: '100%', }}>
       <>
         {/* Modal haut affichage down + image + titre + details */}
-        <View style={{ marginTop: 10, marginBottom: 40, width: 100, height: 0, alignSelf: 'center', borderWidth: 1, borderColor: '#4e4e4e' }}/>
+        <View style={{ marginTop: 10, marginBottom: 40, width: 100, height: 0, alignSelf: 'center', borderWidth: 0 }}/>
         <View style={{ justifyContent: 'space-between', flexDirection: 'column', width: '100%', height: '90%' }}>
           <View style={{ marginBottom: 30, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
             <View>
@@ -171,13 +171,13 @@ const CameraApp = (props) => {
               <Text style={styles.text, styles.black}>{SubTitle}</Text>
             </View>
           </View>
-          <View style={{ backgroundColor: 'rgba(188, 177, 154, 0.5)', borderRadius: 30, borderWidth: 3, borderColor: '#BCB19A' }}>
+          <View style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 30, borderWidth: 0, borderColor: '#FFF', marginLeft: 20, marginRight: 20}}>
             {/* View tableau information */}
             <View style={{ justifyContent: 'space-between', width: '100%', height: 'auto' }}>
               {/* Energie */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderTopStartRadius: 45, justifyContent: 'center' }}>
-                  <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides</Text>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderTopStartRadius: 45, justifyContent: 'center' }}>
+                  <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Energie</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
                   <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Product.product.nutriments.energy_100g}{" Kcal"}</Text>
@@ -186,7 +186,7 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Matières Grasses */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                   <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Matières grasses</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
@@ -196,7 +196,7 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Acides gras saturés */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                   <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Acides gras saturés</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
@@ -206,8 +206,8 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Glucide dont sucre */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
-                  <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucide dont sucre</Text>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                  <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Glucides dont sucres</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
                   <Text style={{ color: 'black', fontSize: 20, color: 'black' }}>{Math.round(Product.product.nutriments.carbohydrates_100g * 10) / 10}{" g"}</Text>
@@ -216,7 +216,7 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Fibres */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                   <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Fibres</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
@@ -226,7 +226,7 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Protéines */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, justifyContent: 'center' }}>
                   <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Protéines</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
@@ -236,7 +236,7 @@ const CameraApp = (props) => {
               <Divider style={styles.divider} />
               {/* Sel */}
               <View style={{ flexDirection: 'row' }}>
-                <View style={{ backgroundColor: '#BCB19A', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderBottomLeftRadius: 45, justifyContent: 'center' }}>
+                <View style={{ backgroundColor: '#F98E83', width: 170, height: 35, borderTopRightRadius: 30, borderBottomEndRadius: 30, borderBottomLeftRadius: 45, justifyContent: 'center' }}>
                   <Text style={{ alignSelf: 'center', fontSize: 15, color: 'white' }}>Sel</Text>
                 </View>
                 <View style={{ justifyContent: 'space-evenly', alignItems: 'center', marginLeft: '20%' }}>
@@ -257,10 +257,10 @@ const CameraApp = (props) => {
             <Pressable onPress={() => { }}
               style={({ pressed }) => [
                 {
-                  width: 306,
+                  width: 240,
                   height: 58,
                   borderRadius: 100,
-                  backgroundColor: pressed ? '#598E12' : '#4C711C',
+                  backgroundColor: pressed ? '#FFBBB4' : '#F98E83',
                 },]}>
               <View style={styles.textView}>
                 <Text style={styles.text, styles.white}>
@@ -348,11 +348,11 @@ const CameraApp = (props) => {
               justifyContent:'center',
               width:60,
               height:60,
-              backgroundColor:'#d2f2ec',
+              backgroundColor:'#4B9E92',
               borderRadius:50,
             }}>
               <View>
-                <MaterialCommunityIcons style={{marginLeft: 3}}name="logout" color="#ff791d" size={30} />
+                <MaterialCommunityIcons style={{marginLeft: 3}}name="logout" color="#fff" size={30} />
               </View>
           </Pressable>
       <View style={styles.container}> 
@@ -451,27 +451,27 @@ const styles_Slider = StyleSheet.create({
   },
   nutriscore_A: {
     color: "#0BAD17",
-    fontWeight: "800",
+    fontWeight: "400",
     fontSize: 40,
   },
   nutriscore_B: {
     color: "#76E37E",
-    fontWeight: "800",
+    fontWeight: "400",
     fontSize: 40,
   },
   nutriscore_C: {
     color: "#FAED29",
-    fontWeight: "800",
+    fontWeight: "400",
     fontSize: 40,
   },
   nutriscore_D: {
     color: "#FAAE29",
-    fontWeight: "800",
+    fontWeight: "400",
     fontSize: 40,
   },
   nutriscore_E: {
     color: "#E53B3B",
-    fontWeight: "800",
+    fontWeight: "400",
     fontSize: 40,
   },
   white: {
@@ -488,6 +488,10 @@ const styles_Slider = StyleSheet.create({
 });
 
 const styles = {
+  divider: {
+    borderBottomColor: "#fff",
+    borderBottomWidth: 2,
+  },
   container: {
     flex: 1
   },

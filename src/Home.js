@@ -84,7 +84,7 @@ const Home = () => {
       }
 
           return(
-            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '115%',backgroundColor:'#486F3A'}}>         
+            <View style={homeStyleSheet._bouton_group, {width: '100%', height: '115%',backgroundColor:'#D2F2EC'}}>         
                 <Spinner visible={isLoading}/>
                 <Animated.View style={homeStyleSheet._bouton_group,animationGoTop,animationGoDown/*,{opacity: state.fadeAnimation}*/}>                                   
                 <ImageBackground /*source={require('../assets/fruits.gif')}</Animated.View>*/ style={{width: '100%', height: '100%'}} resizeMode="cover">
@@ -104,12 +104,12 @@ const Home = () => {
                                 width: 306,
                                 height: 58,
                                 borderRadius: 100,
-                                backgroundColor: pressed ? '#598E12' : '#4C711C',
+                                backgroundColor: pressed ? '#f1f1f3' : '#f3f3f3',
                             },
                         
                         ]}>
                         <View style={homeStyleSheet._TextView}>
-                            <Text style = {homeStyleSheet._text, homeStyleSheet._white}>
+                            <Text style = {homeStyleSheet._text, homeStyleSheet._black}>
                                 Commencer
                             </Text>
                         </View>

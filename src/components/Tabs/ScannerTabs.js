@@ -17,7 +17,7 @@ const TabTop = createMaterialTopTabNavigator();
 export default function ScannerTab() {
   return (
     <>
-        <Tab.Navigator initialRouteName="Scanner" tabBarPosition="bottom"  initialLayout="{ width: Dimensions.get('window').width }" screenOptions={{ tabBarIndicatorStyle: {height: 0}, tabBarStyle: { height: 65, justifyContent: 'center', backgroundColor: '#d2f2ec' }, tabBarPressColor: "#d2f2ec", tabBarShowLabel: false, headerShown: false, tabBarInactiveTintColor: '#434343', tabBarActiveTintColor: '#ff791d'}}>
+        <Tab.Navigator initialRouteName="Scanner" tabBarPosition="bottom"  initialLayout="{ width: Dimensions.get('window').width }" screenOptions={{ tabBarIndicatorStyle: {height: 0}, tabBarStyle: { height: 65, justifyContent: 'center', backgroundColor: '#4B9E92' }, tabBarPressColor: "#4B9E92", tabBarShowLabel: false, headerShown: false, tabBarInactiveTintColor: '#4e4e4e', tabBarActiveTintColor: '#fff'}}>
           <Tab.Screen name="Nutrition" component={Alimentation} 
             options={{
               tabBarIcon: ({ color }) => (
